@@ -16,9 +16,9 @@ You can test this software with embeded samples. Code is public so please feel f
 Source code is available at: https://github.com/marekbar1985/nbn_csharp
 
 Home page: https://sites.google.com/site/neuralnetworknbn/
-<wiki:video url="http://youtube.com/JOFYWt2Eqs8?t=5s"/>
+<wiki:video url=http://www.youtube.com/watch?v=JOFYWt2Eqs8?t=5s"/>
 
 
 
 Training neural networks with use of NBN algorithm in C#. In this training neural network was learning for parity 2 and parity 10 data.
-<wiki:video url="http://youtube.com/HSupohcrig4"/>
+<wiki:video url="http://www.youtube.com/watch?v=HSupohcrig4"/>

@@ -18,7 +18,7 @@ Source code is available at: https://github.com/marekbar1985/nbn_csharp
 Home page: https://sites.google.com/site/neuralnetworknbn/
 
 Training neural networks with use of NBN algorithm in C# - full usage tutorial
-<wiki:video url=http://www.youtube.com/watch?v=JOFYWt2Eqs8"/>
+<wiki:video url="http://www.youtube.com/watch?v=JOFYWt2Eqs8"/>
 
 
 

@@ -639,6 +639,8 @@ namespace LearnByErrorLibrary
 
                     for(int jw = 0; jw < 30; jw++)
                     {
+                        //ww = ww_backup - ((hessian+mu*I)\gradient)';
+                        //Hessian___Gradient___Calculation___Test
                         var diff = ((hessian.HessianMat + (I * setting.MU)).Inverted * hessian.GradientMat).Transposed;
 
                         if (OnDebug != null)
@@ -660,7 +662,7 @@ namespace LearnByErrorLibrary
 
                         if (OnDebug != null) debug("\r\nSSE[" + result.iterations.ToString() + "] = " + error.Error.ToString());
 
-                        if (error.Error <= (double)SSE[result.iterations - 1])
+                        if (error.Error <= SSE.PreviousSSE(result.iterations))
                         {
                             if (setting.MU > setting.MUL)
                             {
@@ -674,9 +676,9 @@ namespace LearnByErrorLibrary
                             setting.MU *= setting.Scale;
                         }
 
-                    }//while
+                    }
 
-                    double rmse = Math.Sqrt(((double)SSE[result.iterations]) / inp.Rows);//SSE.getRMSE(result.iterations, inp.Rows);//z ostatniego a nie to co jest w środku
+                    double rmse = Math.Sqrt(((double)SSE[result.iterations]) / inp.Rows);
 
                     RMSE[result.iterations] = rmse;
                     updateChart(result.iterations, rmse);
@@ -684,16 +686,18 @@ namespace LearnByErrorLibrary
                     if ((double)SSE[result.iterations] < setting.MaxError)
                     {
                         break;
-                    }//if
+                    }
 
                                         
                     if (OnDebug != null) debug("Błąd: " + rmse.ToString());
 
-                    //if (SSE(iter-1)-SSE(iter))/SSE(iter-1)<0.000000000000001
-
-                    if((((double)SSE[result.iterations-1])-((double)SSE[result.iterations]))/((double)SSE[result.iterations-1]) < NetworkError.DesiredError)
-
-                    //if (SSE.getSSE(result.iterations) < NetworkError.DesiredError)
+                    if(
+                        (SSE.PreviousSSE(result.iterations)-((double)SSE[result.iterations]))
+                        /
+                        SSE.PreviousSSE(result.iterations)
+                        <
+                        NetworkError.DesiredError//0.000000000000001
+                      )
                     {
                         break;
                     }
@@ -791,25 +795,9 @@ namespace LearnByErrorLibrary
 
             result.Settings = this.settings;
 
-            /*
-             Ti = [-1 -1;-1 1; 1 -1]; Ti_tst = [1 1];
-             Td = [1 ;0; 0]; Td_tst=[1];
-             */
-            //inputLearn[0, 0] = -1;
-            //inputLearn[0, 1] = -1;
-            //inputLearn[1, 0] = -1;
-            //inputLearn[1, 1] = 1;
-            //inputLearn[2, 0] = 1;
-            //inputLearn[2, 1] = -1;
-
-            //outputLearn[0, 0] = 1;
-            //outputLearn[1, 0] = 0;
-            //outputLearn[2, 0] = 0;
-
             for (trial = 0; trial < trials; trial++)
             {
                 var initialWeights = Weights.Generate(info.nw);
-                //initialWeights.FillWithNumber(1);//usunąć po testach
 
                 initialWeights.Name = "Initial";
                 if (OnDebug != null)
@@ -828,8 +816,8 @@ namespace LearnByErrorLibrary
 
                 result.Add(tr.weights.Data[0], SSE.ToDoubleArray(), RMSE.ToDoubleArray());
 
-                result.LearnRMSE = (double)RMSE[RMSE.Count];//Math.Sqrt(tr.sse / inputLearn.Rows);
-                LearnRmseList = LastRMSE;// result.LearnRMSE;//save learn rmse from this trial
+                result.LearnRMSE = (double)RMSE[RMSE.Count];
+                LearnRmseList = LastRMSE;
                 
                 if (OnDebug != null)
                 {
@@ -881,9 +869,7 @@ namespace LearnByErrorLibrary
                     HistoryPDF pdf = new HistoryPDF(data.Result, data.ChartFilename, true);
                     pdf.Save(data.Filename);
                 }
-                catch
-                { //don't care about it
-                }
+                catch { }
             }
 
             return result;

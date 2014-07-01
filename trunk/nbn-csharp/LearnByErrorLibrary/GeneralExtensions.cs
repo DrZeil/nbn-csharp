@@ -74,6 +74,10 @@ namespace LearnByErrorLibrary
             return ((double)SSE[iteration - 1] - (double)SSE[iteration]) / (double)SSE[iteration - 1];
         }
 
+        public static double PreviousSSE(this System.Collections.Hashtable SSE, int iteration)
+        {
+            return (double)SSE[iteration - 1];
+        }
         /// <summary>
         /// Get vector filled with zeroes
         /// </summary>

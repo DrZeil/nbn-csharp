@@ -399,6 +399,7 @@ namespace LearnByError
             // 
             chartArea1.AxisY.IsLogarithmic = true;
             chartArea1.AxisY.ScaleBreakStyle.LineDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Dot;
+            chartArea1.AxisY.ScaleBreakStyle.Spacing = 0.5D;
             chartArea1.AxisY2.IsLogarithmic = true;
             chartArea1.Name = "ChartArea1";
             this.chart.ChartAreas.Add(chartArea1);

@@ -487,7 +487,8 @@ namespace LearnByError
                 }
                 chart.Series.Clear();
                 var result = nbn.Run(app.LearnTrials);
-                String runResult = String.Format(Resource.Inst.Get("r29"), result.AverageLearnRMSE, result.AverageTestRMSE, result.Settings.MaxError);
+                String runResult = String.Format(Resource.Inst.Get("r29"), 
+                    result.AverageLearnRMSE, result.AverageTestRMSE, result.Settings.MaxError);
 
                 runResult += " " + String.Format(Resource.Inst.Get("r167"),
                     (result.AverageLearnRMSE <= result.Settings.MaxError ? Resource.Inst.Get("r169") : Resource.Inst.Get("r170")));

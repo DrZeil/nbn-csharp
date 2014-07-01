@@ -158,8 +158,8 @@ namespace UnitTests
             //iw[2] = 7;
 
             var error = CalculateError(ref info, ref input, ref output, ref topo, weights, ref act, ref gain, ref iw);
-            error = Math.Round(error, 3);
-            double errorFromMatLab = 13.833;
+            error = Math.Round(error, 4);
+            double errorFromMatLab = 13.8328;
 
             Assert.AreEqual(errorFromMatLab, error);
         }

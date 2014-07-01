@@ -65,56 +65,7 @@ res =
             Assert.AreEqual(0.1667, Math.Round(res[0, 0],4));
             Assert.AreEqual(0.25, Math.Round(res[0, 1],4));
 
-        }
-
-        [TestMethod]
-        public void Test__CalculateError()
-        {
-            //based on parity 2 example
-            NetworkInfo info = new NetworkInfo();
-            info.np = 3;
-            info.ni = 2;
-            info.no = 1;
-            info.nn = 2;
-            info.nw = 7;
-
-            Input i = new Input(info.np, info.ni);
-            i[0, 0] = -1;
-            i[0, 1] = -1;
-
-            i[1, 0] = -1;
-            i[1, 1] = 1;
-
-            i[2, 0] = 1;
-            i[2, 1] = -1;
-
-            Output o = new Output(info.np, info.no);
-            o[0, 0] = 1;
-            o[1, 0] = 0;
-            o[2, 0] = 0;
-
-            Topography topo = new Topography(new double[] { 2,1,2,3,1,2,3});
-            Index iw = new Index(3);
-            iw[0]=0;
-            iw[1]=3;
-            iw[2]=6;
-            
-
-            Weights w = new Weights(info.nw);
-            w.FillWithNumber(0.1);
-
-            Activation act = new Activation(info.nn);
-            act[0] = 2;
-            act[1] = 0;
-
-            Gain g = new Gain(info.nn);
-            g[0] = 1;
-            g[1] = 1;
-
-            NetworkError e = new NetworkError();
-            e.CalculateError(ref info, ref i, ref o, ref topo, w, ref act, ref g, ref iw);
-            Assert.AreEqual(1.23, Math.Round(e.Error,2));
-        }
+        }       
 
         [TestMethod]
         public void Test__NormalizeDataForInOut()

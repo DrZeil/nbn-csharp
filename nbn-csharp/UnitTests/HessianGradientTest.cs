@@ -302,7 +302,15 @@ namespace UnitTests
                 disp(hessian);
                 disp('GRADIENT:');
                 disp(gradient);
+              
+              I = eye(7);
+              mu = 0.1;
+             tmp = ((hessian+mu*I)\gradient)';
+             disp('roznica');
+             disp(tmp);
                 end
+             * 
+             * 0.269341975994640   0.209316655395597   0.209316655395588   0.641329598754813   0.498403437198476   0.498403437198481   1.247595164610358
              */
 
             int decimalAccuracy = 2;
@@ -317,6 +325,16 @@ namespace UnitTests
             for (int i = 0; i < eg.Rows; i++)//check gradient
             {
                 Assert.AreEqual(Math.Round(eg[i, 0], decimalAccuracy), Math.Round(GradientMat[i, 0], decimalAccuracy));
+            }
+            var I = MatrixMB.Eye(7);
+            double mu = 0.1;
+            var diff = ((HessianMat + (I * mu)).Inverted * GradientMat).Transposed;
+            var expected = new double[] { 0.269341975994640, 0.209316655395597, 0.209316655395588, 0.641329598754813, 0.498403437198476, 0.498403437198481, 1.247595164610358};
+
+            decimalAccuracy = 5;
+            for (int i = 0; i < expected.Length; i++)
+            {
+                Assert.AreEqual(Math.Round(expected[i], decimalAccuracy), Math.Round(diff[0, i], decimalAccuracy));
             }
         }
     }

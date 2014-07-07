@@ -36,11 +36,13 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="MigraDoc.DocumentObjectModel">
-      <HintPath>..\..\Zewnętrzne\MigraDoc.DocumentObjectModel.dll</HintPath>
+    <Reference Include="MigraDoc.DocumentObjectModel, Version=1.32.3885.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>.\MigraDoc.DocumentObjectModel.dll</HintPath>
     </Reference>
-    <Reference Include="MigraDoc.Rendering">
-      <HintPath>..\..\Zewnętrzne\MigraDoc.Rendering.dll</HintPath>
+    <Reference Include="MigraDoc.Rendering, Version=1.32.3885.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>.\MigraDoc.Rendering.dll</HintPath>
     </Reference>
     <Reference Include="PdfSharp">
       <HintPath>..\..\Zewnętrzne\PdfSharp.dll</HintPath>
@@ -52,7 +54,6 @@
     <Reference Include="System.Windows.Forms.DataVisualization" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
   </ItemGroup>
@@ -115,7 +116,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="MigraDoc.DocumentObjectModel.dll" />
+    <Content Include="MigraDoc.Rendering.dll" />
     <Content Include="notes.txt" />
+    <Content Include="PdfSharp.dll" />
     <None Include="Resources\napiszprogram.bmp" />
   </ItemGroup>
   <ItemGroup>
@@ -127,7 +131,7 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties StartAt="2/1/2014 12:00:00 AM" Versioning="1" IncrementAction="3" IncrementOnBuild="True" IncrementOnRebuild="True" />
+      <UserProperties IncrementOnRebuild="True" IncrementOnBuild="True" IncrementAction="3" Versioning="1" StartAt="2/1/2014 12:00:00 AM" />
     </VisualStudio>
   </ProjectExtensions>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

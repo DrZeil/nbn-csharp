@@ -126,6 +126,8 @@ namespace LearnByErrorLibrary
             private set;
         }
 
+        private string _reasearch_folder = "";
+
         /// <summary>
         /// extract learn or train data
         /// </summary>
@@ -489,7 +491,7 @@ namespace LearnByErrorLibrary
         /// <param name="filename">String - filename</param>
         /// <returns>bool - success flag</returns>
         private bool loadInputData(String filename)
-        {
+        {           
             try
             {
                 if (!File.Exists(filename))
@@ -510,8 +512,14 @@ namespace LearnByErrorLibrary
                     int[] ind = data.Rows.RandomPermutation();
                     int Tnp = Math.Round(data.Rows * 0.7).ToInt();
 
+        
+                    //inputLearn = MatrixMB.Load("C:\\Users\\marekbar1985\\Desktop\\parity3\\uczenie_wejscie_parity3.dat").ToInput();
+                    //inputTest = MatrixMB.Load("C:\\Users\\marekbar1985\\Desktop\\parity3\\testowanie_wejscie_parity3.dat").ToInput();
+                    //outputLearn = MatrixMB.Load("C:\\Users\\marekbar1985\\Desktop\\parity3\\uczenie_wyjscie_parity3.dat").ToOutput();
+                    //outputTest = MatrixMB.Load("C:\\Users\\marekbar1985\\Desktop\\parity3\\testowanie_wyjscie_parity3.dat").ToOutput();
+
                     inputTest = input.CopyRows(Tnp, input.Rows - 1).ToInput();
-                    inputLearn = input.CopyRows(Tnp - 1).ToInput();                    
+                    inputLearn = input.CopyRows(Tnp - 1).ToInput();
                     outputTest = output.CopyRows(Tnp, input.Rows - 1).ToOutput();
                     outputLearn = output.CopyRows(Tnp - 1).ToOutput();
 
@@ -529,11 +537,12 @@ namespace LearnByErrorLibrary
                             if (!Directory.Exists(dir)) Directory.CreateDirectory(dir);
 
                             extractionFolder = dir;
-
+                            _reasearch_folder = dir;
                             string learn_input = String.Format("{0}\\{1}_learn_input.dat", dir, name);
                             string test_input = String.Format("{0}\\{1}_test_input.dat", dir, name);
                             string learn_output = String.Format("{0}\\{1}_learn_output.dat", dir, name);
                             string test_output = String.Format("{0}\\{1}_test_output.dat", dir, name);
+                            string initialWweights = String.Format("{0}\\{1}_initial_weights.dat", dir, name);
 
                             inputTest.Store(test_input);
                             inputLearn.Store(learn_input);
@@ -798,6 +807,12 @@ namespace LearnByErrorLibrary
             for (trial = 0; trial < trials; trial++)
             {
                 var initialWeights = Weights.Generate(info.nw);
+                //var initialWeights = MatrixMB.Load("C:\\Users\\marekbar1985\\Desktop\\parity3\\uzyte_wagi_proba_" + (trial + 1).ToString() + "parity3.dat").ToWeights();
+                if (IsResearchMode)
+                {                    
+                    string initialWeightsFile = String.Format("{0}\\{1}{2}_initial_weights.dat", _reasearch_folder, trial, Path.GetFileNameWithoutExtension(result.Filename));
+                    initialWeights.Store(initialWeightsFile);                    
+                }
 
                 initialWeights.Name = "Initial";
                 if (OnDebug != null)
@@ -833,6 +848,9 @@ namespace LearnByErrorLibrary
                 infoTest.np = inputTest.Rows;
 
                 tic();//test time measure start
+
+                //potem usunąć
+                //tr.weights = MatrixMB.Load("C:\\Users\\marekbar1985\\Desktop\\parity3\\wytrenowane_wagi_dla_parity3.dat").ToWeights();
                 error.CalculateError(ref infoTest, ref inputTest, ref outputTest, ref topo, tr.weights, ref act, ref gain, ref indexes);
 
                 var TestExecutionTime = toc();//test time measure stop

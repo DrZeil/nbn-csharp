@@ -3,6 +3,7 @@ Author:  Marek Bar 33808
 Contact: marekbar1985@gmail.com
 Wyższa Szkoła Informatyki i Zarządzania w Rzeszowie
  */
+using Accord.Math.Decompositions;
 namespace LearnByErrorLibrary
 {
     /// <summary>
@@ -30,7 +31,7 @@ namespace LearnByErrorLibrary
         /// Matrix name
         /// </summary>
         public System.String Name = "";
-   
+
         /// <summary>
         /// Lower matrix
         /// </summary>
@@ -67,9 +68,9 @@ namespace LearnByErrorLibrary
             {
                 double min = this.Data[0][0];
                 int row, col;
-                for (col = 0; col < Cols; col++ )
-                {                    
-                    for (row = 0; row < Rows; row++ )
+                for (col = 0; col < Cols; col++)
+                {
+                    for (row = 0; row < Rows; row++)
                     {
                         if (this.Data[row][col] < min) min = this.Data[row][col];
                     }
@@ -82,20 +83,20 @@ namespace LearnByErrorLibrary
         /// Maximum value in matrix
         /// </summary>
         public double MaxValue
-        {            
+        {
             get
             {
                 double max = this.Data[0][0];
                 int row, col;
-                for (col = 0; col < Cols; col++ )
+                for (col = 0; col < Cols; col++)
                 {
-                    for (row = 0; row < Rows; row++ )
+                    for (row = 0; row < Rows; row++)
                     {
                         if (this.Data[row][col] > max) max = this.Data[row][col];
                     }
                 }
                 return max;
-            }            
+            }
         }
 
         /// <summary>
@@ -130,6 +131,10 @@ namespace LearnByErrorLibrary
         {
             get
             {
+                //MatrixMB inv = new MatrixMB(Rows, Cols);
+                //inv.Data = Accord.Math.Matrix.Inverse(this.Data.ToMultidimensionalArray(Rows, Cols)).ToJaggedArray(Rows, Cols);
+                //return inv;
+
                 if (L == null) MakeLU();
 
                 MatrixMB inv = new MatrixMB(Rows, Cols);
@@ -142,8 +147,62 @@ namespace LearnByErrorLibrary
 
                     for (int j = 0; j < Rows; j++) inv[j, i] = col[j, 0];
                 }
+
                 return inv;
             }
+        }
+
+        public MatrixMB LeftDivision(MatrixMB other)
+        {
+            ////useless
+            ///*ALG LIB solver*/
+            //var b = new System.Collections.Generic.List<double>();
+            //for (int i = 0; i < other.Rows; i++) b.Add(other[i, 0]);
+
+            //int info = -1;
+            //alglib.densesolverreport rep = new alglib.densesolverreport();
+
+            //double[] result = new double[b.Count];
+                        
+            //alglib.rmatrixsolve(this.Data.ToMultidimensionalArray(this.Rows, this.Cols),
+            //                    this.Rows,
+            //                    b.ToArray(),
+            //                    out info,
+            //                    out rep,
+            //                    out result);
+            //MatrixMB output = new MatrixMB(b.Count, 1);
+            //for (int i = 0; i < output.Rows; i++) output[i, 0] = b[i];
+            //return output;
+
+            /*Accord version*/
+            var m = Accord.Math.Matrix.Solve(
+                this.Data.ToMultidimensionalArray(this.Rows, this.Cols),
+                other.Data.ToMultidimensionalArray(other.Rows, other.Cols),
+                true//least squares
+                );
+
+            MatrixMB tmp = new MatrixMB(m.GetLength(0), m.GetLength(1));
+
+            tmp.Data = m.ToJaggedArray(tmp.Rows, tmp.Cols);
+            return tmp;
+
+            //float[][] data = new float[this.Rows][];
+            //for (int r = 0; r < this.Rows; r++)
+            //{
+            //    data[r] = new float[this.Cols];
+            //    for (int c = 0; c < this.Cols; c++)
+            //    {
+            //        data[r][c] = (float)Data[r][c];
+            //    }
+            //}
+            //JaggedCholeskyDecompositionF dec = new JaggedCholeskyDecompositionF(data,false,true);
+            //var b = new System.Collections.Generic.List<float>();
+            //for (int i = 0; i < other.Rows; i++) b.Add((float)other[i, 0]);
+            //var res = dec.Solve(b.ToArray());
+            //MatrixMB w = new MatrixMB(res.Length, 1);
+            //for (int i = 0; i < res.Length; i++) w[i, 0] = res[i];
+            //return w;
+            
         }
 
         /// <summary>
@@ -153,11 +212,11 @@ namespace LearnByErrorLibrary
         /// <param name="column">int - column index</param>
         /// <returns>double - value at row and column cross</returns>
         /// <remarks>For better performance use matrix Data property as it is direct data access</remarks>
-        public double this[int row, int column] 
+        public double this[int row, int column]
         {
             get { return Data[row][column]; }
             set { Data[row][column] = value; }
-        }        
+        }
 
         /// <summary>
         /// Gets last column from matrix
@@ -288,11 +347,11 @@ namespace LearnByErrorLibrary
                     {
                         if (this.Data[row][col] == 0)
                         {
-                            counter ++;
+                            counter++;
                         }
                     }
                 }
-                return counter == Rows*Cols;
+                return counter == Rows * Cols;
             }
         }
         #endregion
@@ -309,7 +368,7 @@ namespace LearnByErrorLibrary
             this.Cols = cols;
 
             Data = new double[Rows][];
-            
+
             for (int i = 0; i < Rows; i++)
             {
                 Data[i] = new double[Cols];
@@ -331,10 +390,10 @@ namespace LearnByErrorLibrary
             for (int r = 0; r < Rows; r++)
             {
                 this.Data[r] = new double[Cols];
-                 for (int c = 0; c < Cols; c++)
+                for (int c = 0; c < Cols; c++)
                     this.Data[r][c] = data[r][c];
             }
-               
+
         }
 
         /// <summary>
@@ -358,7 +417,7 @@ namespace LearnByErrorLibrary
         public MatrixMB Row(int row)
         {
             MatrixMB mat = new MatrixMB(1, this.Cols);
-            mat.Data[0] = Data[row];            
+            mat.Data[0] = Data[row];
             return mat;
         }
 
@@ -660,7 +719,7 @@ namespace LearnByErrorLibrary
         /// <returns>MatrixMB</returns>
         public MatrixMB CopyColumnsWithoutLast()
         {
-            return CopyColumns(0, Cols-2);
+            return CopyColumns(0, Cols - 2);
         }
         /// <summary>
         /// Create new Matrix from specified set of rows
@@ -695,6 +754,24 @@ namespace LearnByErrorLibrary
         /// </summary>
         public void MakeLU()
         {
+            //try
+            //{
+            //    if (!IsSquare) throw new MatrixException("The matrix is not square!");
+            //    var lu = new Accord.Math.Decompositions.LuDecomposition(this.Data.ToMultidimensionalArray(Rows, Cols));
+            //    var l = lu.LowerTriangularFactor;
+            //    var u = lu.UpperTriangularFactor;
+            //    L = new MatrixMB(l.GetLength(0), l.GetLength(1), l.ToJaggedArray(l.GetLength(0), l.GetLength(1)));
+            //    U = new MatrixMB(u.GetLength(0), u.GetLength(1), u.ToJaggedArray(u.GetLength(0), u.GetLength(1)));
+            //    PermutationVector = lu.PivotPermutationVector;
+            //}
+            //catch (System.Exception ex)
+            //{
+            //    throw new System.Exception(ex.Message);
+            //}
+
+            //return;
+            //--------------------------------------------------------------------
+
             if (!IsSquare) throw new MatrixException("The matrix is not square!");
             L = MatrixMB.Identity(Rows, Cols);
             U = this.Copy();
@@ -771,7 +848,7 @@ namespace LearnByErrorLibrary
             MatrixMB x = SubsBack(U, z);
 
             return x;
-        
+
         }
 
         /// <summary>
@@ -844,7 +921,7 @@ namespace LearnByErrorLibrary
             {
                 for (row = 0; row < Rows; row++)
                 {
-                    if(Data[row][col] != 0 && number != 0) Data[row][col] /= number;
+                    if (Data[row][col] != 0 && number != 0) Data[row][col] /= number;
                 }
             }
         }
@@ -860,7 +937,7 @@ namespace LearnByErrorLibrary
             {
                 for (row = 0; row < Rows; row++)
                 {
-                    Data[row][col] = System.Math.Pow(Data[row][col],number);
+                    Data[row][col] = System.Math.Pow(Data[row][col], number);
                 }
             }
         }
@@ -941,7 +1018,7 @@ namespace LearnByErrorLibrary
                     splitted = lines[0].Split(new char[] { splitter });
                 }
                 var cols = splitted.Length;
-                for (int i = 0; i < splitted.Length; i++) { if (splitted[i] == "") cols--; }                
+                for (int i = 0; i < splitted.Length; i++) { if (splitted[i] == "") cols--; }
 
                 MatrixMB m = new MatrixMB(rows, cols);
 
@@ -1116,7 +1193,7 @@ namespace LearnByErrorLibrary
                     }
                 }
                 return mat;
-            }            
+            }
         }
 
         /// <summary>
@@ -1126,7 +1203,7 @@ namespace LearnByErrorLibrary
         /// <param name="two">MatrixMB - second matrix</param>
         /// <returns>MatrixMB - new MatrixMB as a result of dividing</returns>
         public static MatrixMB operator /(MatrixMB one, MatrixMB two)
-        {            
+        {
             return one * two.Inverted;
         }
 

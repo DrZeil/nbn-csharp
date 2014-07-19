@@ -216,27 +216,60 @@ namespace UnitTests
         [TestCategory("Matrix")]
         public void InvertMatrix()
         {
+            Console.WriteLine("Testowanie odwracania macierzy");
             //mat.Inverted * mat = mat.Identity            
+            //Jeśli A ma odwrotną A to odwrotna A jest równa A
             MatrixMB mat = new MatrixMB(2,2);
             mat.Data[0][0] = 4;
             mat.Data[0][1] = 7;
             mat.Data[1][0] = 2;
             mat.Data[1][1] = 6;
+            Console.WriteLine("Macierz odwracana");
+            Console.WriteLine(mat.MatrixToString());
 
             double det = mat.Determinant;
             Assert.AreNotEqual(0, det);
             Assert.AreEqual(10, det);
+
             var inv = mat.Inverted;
+            Console.WriteLine("Macierz odwrócona");
+            Console.WriteLine(inv.MatrixToString());
+
             Assert.AreEqual(0.6000, Math.Round(inv.Data[0][0],4));
             Assert.AreEqual(-0.7000, Math.Round(inv.Data[0][1],4));
             Assert.AreEqual(-0.2000, Math.Round(inv.Data[1][0],4));
             Assert.AreEqual(0.4000, Math.Round(inv.Data[1][1],4));
 
+            var A = inv.Inverted;
+            Console.WriteLine("Odwrócenie macierzy odwróconej");
+            Console.WriteLine(inv.MatrixToString());
+
+            int accuracy = 15;
+            for (int i = 0; i < A.Rows; i++)
+            {
+                for (int j = 0; j < A.Cols; j++)
+                {
+                    decimal o = Math.Round((decimal)mat[i, j], accuracy);
+                    decimal a = Math.Round((decimal)A[i, j], accuracy);
+                    Console.WriteLine(string.Format("Orginał: {0}\tPorównywana: {1}", o, a));
+                }
+            }
+
+            for (int i = 0; i < A.Rows; i++)
+            {
+                for (int j = 0; j < A.Cols; j++) 
+                {
+                    decimal o = Math.Round((decimal)mat[i, j], accuracy);
+                    decimal a = Math.Round((decimal)A[i, j], accuracy);
+                    Assert.AreEqual(o, a);
+                }
+            }
+
             var identity = inv * mat;
-            Assert.AreEqual(1, Math.Round(identity.Data[0][0], 4));
-            Assert.AreEqual(0, Math.Round(identity.Data[0][1], 4));
-            Assert.AreEqual(0, Math.Round(identity.Data[1][0], 4));
-            Assert.AreEqual(1, Math.Round(identity.Data[1][1], 4));
+            Assert.AreEqual(1, Math.Round(identity.Data[0][0], accuracy));
+            Assert.AreEqual(0, Math.Round(identity.Data[0][1], accuracy));
+            Assert.AreEqual(0, Math.Round(identity.Data[1][0], accuracy));
+            Assert.AreEqual(1, Math.Round(identity.Data[1][1], accuracy));
         }
 
         /// <summary>

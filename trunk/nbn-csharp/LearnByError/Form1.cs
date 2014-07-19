@@ -52,6 +52,8 @@ namespace LearnByError
 
         private BackgroundWorker worker = null;
 
+        private string MatLabCompareDataFolder = "";
+
         private string maxTmp = "";
         #endregion
 
@@ -461,6 +463,8 @@ namespace LearnByError
                 blockInterface();
                 NBN nbn = new NBN(app.NeuronNumber, inputDataFilename);
                 nbn.IsResearchMode = IsResearch;
+                nbn.MatLabCompareDataFolder = MatLabCompareDataFolder;
+                MatLabCompareDataFolder = "";//thanks got it
                 nbn.OnErrorChange += (s, error) =>
                 {
                     SetText(error.Format());
@@ -1191,6 +1195,31 @@ namespace LearnByError
         private void tsbReasearchLearn_Click(object sender, EventArgs e)
         {
             RunLearningProcess(true);
+        }
+
+        private void tsbCompareWithMatlab_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                FolderBrowserDialog dialog = new FolderBrowserDialog();
+                dialog.RootFolder = Environment.SpecialFolder.Desktop;
+                dialog.ShowNewFolderButton = true;
+                dialog.Description = "Wskaż folder z plikami zapisanymi przez MatLab NBN";
+                if (dialog.ShowDialog() == DialogResult.OK)
+                {
+                    MatLabCompareDataFolder = dialog.SelectedPath;
+                    inputDataFilename = string.Format("{0}\\{1}.dat", MatLabCompareDataFolder, Path.GetFileNameWithoutExtension(Directory.GetFiles(MatLabCompareDataFolder, "*.dat")[0]));
+                    RunLearningProcess();
+                }
+                else
+                {
+                    MatLabCompareDataFolder = "";
+                }                
+            }
+            catch (Exception ex)
+            {
+                status.Text = ex.GetError();
+            }
         }
     }
 }

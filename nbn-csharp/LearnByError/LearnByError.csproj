@@ -370,6 +370,7 @@
     <None Include="Resources\exit.png" />
     <None Include="Resources\britain.png" />
     <None Include="Resources\poland.png" />
+    <None Include="Resources\matlab.png" />
     <Content Include="run.ico" />
     <Content Include="x64\SQLite.Interop.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -437,7 +438,7 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties IncrementOnRebuild="True" IncrementOnBuild="True" IncrementAction="3" Versioning="1" StartAt="2/16/2014 3:10:15 PM" />
+      <UserProperties StartAt="2/16/2014 3:10:15 PM" Versioning="1" IncrementAction="3" IncrementOnBuild="True" IncrementOnRebuild="True" />
     </VisualStudio>
   </ProjectExtensions>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

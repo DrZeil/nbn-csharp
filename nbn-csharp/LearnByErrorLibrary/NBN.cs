@@ -128,6 +128,8 @@ namespace LearnByErrorLibrary
 
         private string _reasearch_folder = "";
 
+        public string MatLabCompareDataFolder = "";
+
         /// <summary>
         /// extract learn or train data
         /// </summary>
@@ -503,29 +505,35 @@ namespace LearnByErrorLibrary
                 {
                     var data = MatrixMB.Load(filename);
 
-                    input = data.CopyColumnsWithoutLast().ToInput();
-                    input.Normalize();
+                    if (MatLabCompareDataFolder.Length > 0)
+                    {
+                        //data from matlab are normalized
+                        string name = Path.GetFileNameWithoutExtension(Directory.GetFiles(MatLabCompareDataFolder, "*.dat")[0]);
+                        inputLearn = MatrixMB.Load(string.Format("{0}\\uczenie_wejscie_{1}.txt", MatLabCompareDataFolder, name)).ToInput();
+                        inputTest = MatrixMB.Load(string.Format("{0}\\testowanie_wejscie_{1}.txt", MatLabCompareDataFolder, name)).ToInput();
+                        outputLearn = MatrixMB.Load(string.Format("{0}\\uczenie_wyjscie_{1}.txt", MatLabCompareDataFolder, name)).ToOutput();
+                        outputTest = MatrixMB.Load(string.Format("{0}\\testowanie_wyjscie_{1}.txt", MatLabCompareDataFolder, name)).ToOutput();
+                    }
+                    else
+                    {
 
-                    output = data.LastColumn.ToOutput();
-                    output.Normalize();
+                        input = data.CopyColumnsWithoutLast().ToInput();
+                        input.Normalize();
 
-                    int[] ind = data.Rows.RandomPermutation();
-                    int Tnp = Math.Round(data.Rows * 0.7).ToInt();
+                        output = data.LastColumn.ToOutput();
+                        output.Normalize();
 
-        
-                    //inputLearn = MatrixMB.Load("C:\\Users\\marekbar1985\\Desktop\\parity3\\uczenie_wejscie_parity3.dat").ToInput();
-                    //inputTest = MatrixMB.Load("C:\\Users\\marekbar1985\\Desktop\\parity3\\testowanie_wejscie_parity3.dat").ToInput();
-                    //outputLearn = MatrixMB.Load("C:\\Users\\marekbar1985\\Desktop\\parity3\\uczenie_wyjscie_parity3.dat").ToOutput();
-                    //outputTest = MatrixMB.Load("C:\\Users\\marekbar1985\\Desktop\\parity3\\testowanie_wyjscie_parity3.dat").ToOutput();
+                        int[] ind = data.Rows.RandomPermutation();
+                        int Tnp = Math.Round(data.Rows * 0.7).ToInt();
 
-                    inputTest = input.CopyRows(Tnp, input.Rows - 1).ToInput();
-                    inputLearn = input.CopyRows(Tnp - 1).ToInput();
-                    outputTest = output.CopyRows(Tnp, input.Rows - 1).ToOutput();
-                    outputLearn = output.CopyRows(Tnp - 1).ToOutput();
-
+                        inputTest = input.CopyRows(Tnp, input.Rows - 1).ToInput();
+                        inputLearn = input.CopyRows(Tnp - 1).ToInput();
+                        outputTest = output.CopyRows(Tnp, input.Rows - 1).ToOutput();
+                        outputLearn = output.CopyRows(Tnp - 1).ToOutput();
+                    }
                     try
                     {
-                        if (IsResearchMode)
+                        if (IsResearchMode)//export for matlab - out of use
                         {
                             string name = Path.GetFileNameWithoutExtension(filename);
                             DateTime d = DateTime.Now;
@@ -649,7 +657,8 @@ namespace LearnByErrorLibrary
                     for(int jw = 0; jw < 30; jw++)
                     {
                         //ww = ww_backup - ((hessian+mu*I)\gradient)';
-                        var diff = ((hessian.HessianMat + (I * setting.MU)).Inverted * hessian.GradientMat).Transposed;
+                         var diff = ((hessian.HessianMat + (I * setting.MU)).Inverted * hessian.GradientMat).Transposed;
+                        //var diff = (hessian.HessianMat + (I * setting.MU)).LeftDivision(hessian.GradientMat).Transposed;
 
                         if (OnDebug != null)
                         {
@@ -749,6 +758,11 @@ namespace LearnByErrorLibrary
             Trials = trials;
             LearnResult result = new LearnResult();
             result.Filename = Filename;
+            if (MatLabCompareDataFolder.Length > 0)
+            {
+                result.Filename = string.Format("{0}\\{1}.dat", MatLabCompareDataFolder, Path.GetFileNameWithoutExtension(Directory.GetFiles(MatLabCompareDataFolder, "*.dat")[0]));
+            }
+
             if (!loadInputData(Filename))
             {
                 updateErrorNBN("Dane nie zostały wczytane.");
@@ -805,8 +819,16 @@ namespace LearnByErrorLibrary
 
             for (trial = 0; trial < trials; trial++)
             {
-                var initialWeights = Weights.Generate(info.nw);
-                //var initialWeights = MatrixMB.Load("C:\\Users\\marekbar1985\\Desktop\\parity3\\uzyte_wagi_proba_" + (trial + 1).ToString() + "parity3.dat").ToWeights();
+                Weights initialWeights = new Weights(info.nw);
+                if (MatLabCompareDataFolder.Length > 0)
+                {
+                    initialWeights = MatrixMB.Load(string.Format("{0}\\poczatkowe_wagi_proba_{1}.txt", MatLabCompareDataFolder, trial+1)).ToWeights();
+                }
+                else
+                {
+                    initialWeights = Weights.Generate(info.nw);
+                }
+                
                 if (IsResearchMode)
                 {                    
                     string initialWeightsFile = String.Format("{0}\\{1}{2}_initial_weights.dat", _reasearch_folder, trial, Path.GetFileNameWithoutExtension(result.Filename));

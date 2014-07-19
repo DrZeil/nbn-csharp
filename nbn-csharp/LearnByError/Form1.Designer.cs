@@ -67,6 +67,7 @@ namespace LearnByError
             this.tsbReasearchLearn = new System.Windows.Forms.ToolStripButton();
             this.tEnglish = new System.Windows.Forms.ToolStripButton();
             this.tPolish = new System.Windows.Forms.ToolStripButton();
+            this.tsbCompareWithMatlab = new System.Windows.Forms.ToolStripButton();
             this.chart = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.cmChart = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.cmChartSave = new System.Windows.Forms.ToolStripMenuItem();
@@ -95,7 +96,7 @@ namespace LearnByError
             this.menu.Location = new System.Drawing.Point(0, 0);
             this.menu.Name = "menu";
             this.menu.Padding = new System.Windows.Forms.Padding(7, 2, 0, 2);
-            this.menu.Size = new System.Drawing.Size(779, 24);
+            this.menu.Size = new System.Drawing.Size(871, 24);
             this.menu.TabIndex = 1;
             // 
             // programToolStripMenuItem
@@ -259,10 +260,10 @@ namespace LearnByError
             this.status,
             this.progress,
             this.stopReasearch});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 661);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 663);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Padding = new System.Windows.Forms.Padding(1, 0, 16, 0);
-            this.statusStrip1.Size = new System.Drawing.Size(779, 24);
+            this.statusStrip1.Size = new System.Drawing.Size(871, 24);
             this.statusStrip1.TabIndex = 2;
             // 
             // status
@@ -295,14 +296,15 @@ namespace LearnByError
             this.toolSaveChart,
             this.toolSettings,
             this.tsHistory,
-            this.toolExit,
+            this.tsbCompareWithMatlab,
             this.tsbReasearchLearn,
+            this.toolExit,
             this.tEnglish,
             this.tPolish});
             this.toolStrip1.Location = new System.Drawing.Point(0, 24);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Padding = new System.Windows.Forms.Padding(6);
-            this.toolStrip1.Size = new System.Drawing.Size(779, 67);
+            this.toolStrip1.Size = new System.Drawing.Size(871, 67);
             this.toolStrip1.Stretch = true;
             this.toolStrip1.TabIndex = 6;
             // 
@@ -395,6 +397,17 @@ namespace LearnByError
             this.tPolish.Text = "Polski";
             this.tPolish.Click += new System.EventHandler(this.tPolish_Click);
             // 
+            // tsbCompareWithMatlab
+            // 
+            this.tsbCompareWithMatlab.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tsbCompareWithMatlab.Image = global::LearnByError.Properties.Resources.matlab;
+            this.tsbCompareWithMatlab.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.tsbCompareWithMatlab.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbCompareWithMatlab.Name = "tsbCompareWithMatlab";
+            this.tsbCompareWithMatlab.Size = new System.Drawing.Size(52, 52);
+            this.tsbCompareWithMatlab.Text = "Użyj danych poczatkowych z NBN MatLab";
+            this.tsbCompareWithMatlab.Click += new System.EventHandler(this.tsbCompareWithMatlab_Click);
+            // 
             // chart
             // 
             chartArea1.AxisY.IsLogarithmic = true;
@@ -409,7 +422,7 @@ namespace LearnByError
             this.chart.Legends.Add(legend1);
             this.chart.Location = new System.Drawing.Point(0, 91);
             this.chart.Name = "chart";
-            this.chart.Size = new System.Drawing.Size(779, 570);
+            this.chart.Size = new System.Drawing.Size(871, 572);
             this.chart.TabIndex = 7;
             // 
             // cmChart
@@ -491,7 +504,7 @@ namespace LearnByError
             this.times.BackColor = System.Drawing.Color.White;
             this.times.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.times.ForeColor = System.Drawing.Color.Black;
-            this.times.Location = new System.Drawing.Point(0, 641);
+            this.times.Location = new System.Drawing.Point(0, 643);
             this.times.Name = "times";
             this.times.Padding = new System.Windows.Forms.Padding(0, 0, 0, 5);
             this.times.Size = new System.Drawing.Size(0, 20);
@@ -502,7 +515,7 @@ namespace LearnByError
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = global::LearnByError.Properties.Resources.background;
-            this.ClientSize = new System.Drawing.Size(779, 685);
+            this.ClientSize = new System.Drawing.Size(871, 687);
             this.Controls.Add(this.times);
             this.Controls.Add(this.chart);
             this.Controls.Add(this.toolStrip1);
@@ -577,6 +590,7 @@ namespace LearnByError
         private System.Windows.Forms.ToolStripStatusLabel stopReasearch;
         private System.Windows.Forms.ToolStripMenuItem testForData;
         private System.Windows.Forms.ToolStripButton tsbReasearchLearn;
+        private System.Windows.Forms.ToolStripButton tsbCompareWithMatlab;
     }
 }
 

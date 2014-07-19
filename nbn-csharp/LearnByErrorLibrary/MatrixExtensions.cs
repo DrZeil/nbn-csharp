@@ -13,6 +13,41 @@ namespace LearnByErrorLibrary
     /// </summary>
     public static class MatrixExtensions
     {
+        public static double[,] ToMultidimensionalArray(this double[][] array, int rows, int cols)
+        {
+            double[,] tmp = new double[rows, cols];
+            for (int i = 0; i < rows; i++)
+            {
+                for (int j = 0; j < cols; j++)
+                {
+                    tmp[i, j] = array[i][j];
+                }
+            }
+
+            return tmp;
+        }
+
+        public static double[][] ToJaggedArray(this double[,] array, int rows, int cols)
+        {
+            double[][]tmp = new double[rows][];
+
+            for (int i = 0; i < rows; i++)
+            {
+                tmp[i] = new double[cols];
+            }
+
+            for (int i = 0; i < rows; i++)
+            {
+                for (int j = 0; j < cols; j++)
+                {
+                    tmp[i][j] = array[i,j];
+                }
+            }
+
+            return tmp;
+        }
+
+
         /// <summary>
         /// Convert Matrix to string representation
         /// </summary>

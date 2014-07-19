@@ -483,6 +483,16 @@ namespace LearnByError.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap matlab {
+            get {
+                object obj = ResourceManager.GetObject("matlab", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap napiszprogram {
             get {
                 object obj = ResourceManager.GetObject("napiszprogram", resourceCulture);

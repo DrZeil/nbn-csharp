@@ -44,8 +44,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>C:\Program Files\Accord.NET\Framework\Release\Accord.Math.dll</HintPath>
     </Reference>
-    <Reference Include="alglibnet2">
-      <HintPath>..\..\..\..\Pomoce naukowe\alglib-3.8.2.csharp\csharp\alglibnet2.dll</HintPath>
+    <Reference Include="Meta.Numerics, Version=2.2.0.0, Culture=neutral, PublicKeyToken=67d25c65a6631347, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>.\Meta.Numerics.dll</HintPath>
     </Reference>
     <Reference Include="MigraDoc.DocumentObjectModel, Version=1.32.3885.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -127,6 +128,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Meta.Numerics.dll" />
     <Content Include="MigraDoc.DocumentObjectModel.dll" />
     <Content Include="MigraDoc.Rendering.dll" />
     <Content Include="notes.txt" />
@@ -142,7 +144,7 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties IncrementOnRebuild="True" IncrementOnBuild="True" IncrementAction="3" Versioning="1" StartAt="2/1/2014 12:00:00 AM" />
+      <UserProperties StartAt="2/1/2014 12:00:00 AM" Versioning="1" IncrementAction="3" IncrementOnBuild="True" IncrementOnRebuild="True" />
     </VisualStudio>
   </ProjectExtensions>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

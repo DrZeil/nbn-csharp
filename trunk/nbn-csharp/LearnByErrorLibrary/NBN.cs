@@ -657,8 +657,8 @@ namespace LearnByErrorLibrary
                     for(int jw = 0; jw < 30; jw++)
                     {
                         //ww = ww_backup - ((hessian+mu*I)\gradient)';
-                         var diff = ((hessian.HessianMat + (I * setting.MU)).Inverted * hessian.GradientMat).Transposed;
-                        //var diff = (hessian.HessianMat + (I * setting.MU)).LeftDivision(hessian.GradientMat).Transposed;
+                       //  var diff = ((hessian.HessianMat + (I * setting.MU)).Inverted * hessian.GradientMat).Transposed;
+                        var diff = (hessian.HessianMat + (I * setting.MU)).SolveEquatation(hessian.GradientMat).Transposed;
 
                         if (OnDebug != null)
                         {

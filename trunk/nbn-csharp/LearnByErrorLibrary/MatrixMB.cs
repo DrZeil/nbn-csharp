@@ -4,6 +4,7 @@ Contact: marekbar1985@gmail.com
 Wyższa Szkoła Informatyki i Zarządzania w Rzeszowie
  */
 using Accord.Math.Decompositions;
+using Meta.Numerics.Matrices;
 namespace LearnByErrorLibrary
 {
     /// <summary>
@@ -131,6 +132,7 @@ namespace LearnByErrorLibrary
         {
             get
             {
+                //same as mine below
                 //MatrixMB inv = new MatrixMB(Rows, Cols);
                 //inv.Data = Accord.Math.Matrix.Inverse(this.Data.ToMultidimensionalArray(Rows, Cols)).ToJaggedArray(Rows, Cols);
                 //return inv;
@@ -152,10 +154,9 @@ namespace LearnByErrorLibrary
             }
         }
 
-        public MatrixMB LeftDivision(MatrixMB other)
-        {
-            ////useless
-            ///*ALG LIB solver*/
+        public MatrixMB SolveEquatation(MatrixMB other)
+        {            
+            ///*ALG LIB solver - useless*/
             //var b = new System.Collections.Generic.List<double>();
             //for (int i = 0; i < other.Rows; i++) b.Add(other[i, 0]);
 
@@ -163,7 +164,7 @@ namespace LearnByErrorLibrary
             //alglib.densesolverreport rep = new alglib.densesolverreport();
 
             //double[] result = new double[b.Count];
-                        
+
             //alglib.rmatrixsolve(this.Data.ToMultidimensionalArray(this.Rows, this.Cols),
             //                    this.Rows,
             //                    b.ToArray(),
@@ -174,7 +175,7 @@ namespace LearnByErrorLibrary
             //for (int i = 0; i < output.Rows; i++) output[i, 0] = b[i];
             //return output;
 
-            /*Accord version*/
+            /*Accord version - the most accurate*/
             var m = Accord.Math.Matrix.Solve(
                 this.Data.ToMultidimensionalArray(this.Rows, this.Cols),
                 other.Data.ToMultidimensionalArray(other.Rows, other.Cols),
@@ -186,23 +187,27 @@ namespace LearnByErrorLibrary
             tmp.Data = m.ToJaggedArray(tmp.Rows, tmp.Cols);
             return tmp;
 
-            //float[][] data = new float[this.Rows][];
-            //for (int r = 0; r < this.Rows; r++)
-            //{
-            //    data[r] = new float[this.Cols];
-            //    for (int c = 0; c < this.Cols; c++)
-            //    {
-            //        data[r][c] = (float)Data[r][c];
-            //    }
-            //}
-            //JaggedCholeskyDecompositionF dec = new JaggedCholeskyDecompositionF(data,false,true);
-            //var b = new System.Collections.Generic.List<float>();
-            //for (int i = 0; i < other.Rows; i++) b.Add((float)other[i, 0]);
-            //var res = dec.Solve(b.ToArray());
-            //MatrixMB w = new MatrixMB(res.Length, 1);
-            //for (int i = 0; i < res.Length; i++) w[i, 0] = res[i];
-            //return w;
-            
+
+            ///*Meta Numeric way
+            // http://metanumerics.codeplex.com/documentation
+            // */
+            //SquareMatrix A = new SquareMatrix(Rows);
+            //for (int r = 0; r < Rows; r++)
+            //    for (int c = 0; c < Cols; c++)
+            //        A[r, c] = Data[r][c];
+
+            //ColumnVector b = new ColumnVector(Rows);
+            //for (int i = 0; i < Rows; i++)
+            //    b[i] = other[i, 0];
+
+            //SquareLUDecomposition LU = A.LUDecomposition();  // Decompose A = L U    
+            //ColumnVector x = LU.Solve(b); // Solve A x = b via x = U^(-1) L^(-1) b
+
+            //MatrixMB xx = new MatrixMB(Rows,1);
+            //for (int i = 0; i < Rows; i++)
+            //    xx[i, 0] = x[i];
+
+            //return xx;
         }
 
         /// <summary>

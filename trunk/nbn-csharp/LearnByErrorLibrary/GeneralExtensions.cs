@@ -78,6 +78,12 @@ namespace LearnByErrorLibrary
         {
             return (double)SSE[iteration - 1];
         }
+
+        public static double CurrentSSE(this System.Collections.Hashtable SSE)
+        {
+            return (double)SSE[SSE.Count - 1];
+        }
+
         /// <summary>
         /// Get vector filled with zeroes
         /// </summary>
@@ -92,6 +98,22 @@ namespace LearnByErrorLibrary
             }
             return row;
         }
+
+        public static double GetStandardDeviation(this double[] data)
+        {
+            double sum = 0;
+            double n = data.Length;
+            for (int i = 0; i < n; i++) sum += data[i];
+            double average = sum / n;
+            double s = 0;
+            for (int i = 0; i < n; i++)
+            {
+                s = Math.Pow(data[i] - average, 2);
+            }
+
+            return Math.Sqrt(s / (n - 1));
+        }
+
     }
 
 }

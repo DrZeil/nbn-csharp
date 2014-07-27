@@ -98,6 +98,8 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="TopographyType.cs" />
+    <Compile Include="TrainResult.cs" />
+    <Compile Include="VersionNBN.cs" />
     <Compile Include="WeightPointers.cs" />
     <Compile Include="Input.cs" />
     <Compile Include="MatrixException.cs" />
@@ -128,7 +130,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Meta.Numerics.dll" />
     <Content Include="MigraDoc.DocumentObjectModel.dll" />
     <Content Include="MigraDoc.Rendering.dll" />
     <Content Include="notes.txt" />
@@ -144,7 +145,7 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties StartAt="2/1/2014 12:00:00 AM" Versioning="1" IncrementAction="3" IncrementOnBuild="True" IncrementOnRebuild="True" />
+      <UserProperties IncrementOnRebuild="True" IncrementOnBuild="True" IncrementAction="3" Versioning="1" StartAt="2/1/2014 12:00:00 AM" />
     </VisualStudio>
   </ProjectExtensions>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

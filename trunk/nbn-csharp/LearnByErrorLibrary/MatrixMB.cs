@@ -4,7 +4,8 @@ Contact: marekbar1985@gmail.com
 Wyższa Szkoła Informatyki i Zarządzania w Rzeszowie
  */
 using Accord.Math.Decompositions;
-using Meta.Numerics.Matrices;
+using Accord.Math;
+
 namespace LearnByErrorLibrary
 {
     /// <summary>
@@ -155,59 +156,15 @@ namespace LearnByErrorLibrary
         }
 
         public MatrixMB SolveEquatation(MatrixMB other)
-        {            
-            ///*ALG LIB solver - useless*/
-            //var b = new System.Collections.Generic.List<double>();
-            //for (int i = 0; i < other.Rows; i++) b.Add(other[i, 0]);
-
-            //int info = -1;
-            //alglib.densesolverreport rep = new alglib.densesolverreport();
-
-            //double[] result = new double[b.Count];
-
-            //alglib.rmatrixsolve(this.Data.ToMultidimensionalArray(this.Rows, this.Cols),
-            //                    this.Rows,
-            //                    b.ToArray(),
-            //                    out info,
-            //                    out rep,
-            //                    out result);
-            //MatrixMB output = new MatrixMB(b.Count, 1);
-            //for (int i = 0; i < output.Rows; i++) output[i, 0] = b[i];
-            //return output;
-
+        {
+            return this.Inverted * other;
             /*Accord version - the most accurate*/
-            var m = Accord.Math.Matrix.Solve(
-                this.Data.ToMultidimensionalArray(this.Rows, this.Cols),
-                other.Data.ToMultidimensionalArray(other.Rows, other.Cols),
-                true//least squares
-                );
-
+            var m = Data.ToMultidimensionalArray(Rows,Cols).Solve(other.Data.ToMultidimensionalArray(other.Rows,other.Cols));
+            //var m = Data.ToMultidimensionalArray().Inverse().Multiply(other.Data.ToMultidimensionalArray());
             MatrixMB tmp = new MatrixMB(m.GetLength(0), m.GetLength(1));
 
             tmp.Data = m.ToJaggedArray(tmp.Rows, tmp.Cols);
             return tmp;
-
-
-            ///*Meta Numeric way
-            // http://metanumerics.codeplex.com/documentation
-            // */
-            //SquareMatrix A = new SquareMatrix(Rows);
-            //for (int r = 0; r < Rows; r++)
-            //    for (int c = 0; c < Cols; c++)
-            //        A[r, c] = Data[r][c];
-
-            //ColumnVector b = new ColumnVector(Rows);
-            //for (int i = 0; i < Rows; i++)
-            //    b[i] = other[i, 0];
-
-            //SquareLUDecomposition LU = A.LUDecomposition();  // Decompose A = L U    
-            //ColumnVector x = LU.Solve(b); // Solve A x = b via x = U^(-1) L^(-1) b
-
-            //MatrixMB xx = new MatrixMB(Rows,1);
-            //for (int i = 0; i < Rows; i++)
-            //    xx[i, 0] = x[i];
-
-            //return xx;
         }
 
         /// <summary>
@@ -438,6 +395,11 @@ namespace LearnByErrorLibrary
             {
                 data[i] = this.Data[row][i];
             }
+        }
+
+        public void ClearWithZeros()
+        {
+            this.FillWithNumber(0);
         }
 
         /// <summary>

@@ -464,6 +464,7 @@ namespace LearnByError
                 NBN nbn = new NBN(app.NeuronNumber, inputDataFilename);
                 nbn.IsResearchMode = IsResearch;
                 nbn.MatLabCompareDataFolder = MatLabCompareDataFolder;
+                string tmpMLF = MatLabCompareDataFolder;
                 MatLabCompareDataFolder = "";//thanks got it
                 nbn.OnErrorChange += (s, error) =>
                 {
@@ -491,6 +492,24 @@ namespace LearnByError
                 }
                 chart.Series.Clear();
                 var result = nbn.Run(app.LearnTrials);
+                if (tmpMLF.Length > 0)
+                {
+                    string file = tmpMLF + "\\wyniki_z_nbn_csharp.txt";
+                    if (File.Exists(file)) File.Delete(file);
+                    using (var w = new System.IO.StreamWriter(file, true))
+                    {
+                        w.WriteLine("Dane: " + Path.GetFileNameWithoutExtension(result.Filename));
+                        w.WriteLine("Liczba neuronów: " + result.Info.nn.ToString());
+                        w.WriteLine(string.Format("Średnie RMSE uczenia: {0}", result.AverageLearnRMSE));
+                        w.WriteLine(string.Format("Średnie RMSE testowania: {0}", result.AverageTestRMSE));
+                        w.WriteLine(string.Format("Średnie czas uczenia: {0}", result.AverageLearnTime));
+                        w.WriteLine(string.Format("Średnie czas testowania: {0}", result.AverageTestTime));
+                        w.WriteLine(string.Format("Odchylenie standardowe uczenia: {0}", result.StandardDeviation));
+                        w.WriteLine(string.Format("Odchylenie standardowe testowania: {0}", result.StandardDeviationTest));
+                    }
+                }
+
+                std.Text = string.Format("Odchylenie standardowe uczenia: {0} oraz testowania: {1}", result.StandardDeviation, result.StandardDeviationTest);
                 String runResult = String.Format(Resource.Inst.Get("r29"), 
                     result.AverageLearnRMSE, result.AverageTestRMSE, result.Settings.MaxError);
 

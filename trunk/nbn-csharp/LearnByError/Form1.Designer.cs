@@ -63,11 +63,11 @@ namespace LearnByError
             this.toolSaveChart = new System.Windows.Forms.ToolStripButton();
             this.toolSettings = new System.Windows.Forms.ToolStripButton();
             this.tsHistory = new System.Windows.Forms.ToolStripButton();
-            this.toolExit = new System.Windows.Forms.ToolStripButton();
+            this.tsbCompareWithMatlab = new System.Windows.Forms.ToolStripButton();
             this.tsbReasearchLearn = new System.Windows.Forms.ToolStripButton();
+            this.toolExit = new System.Windows.Forms.ToolStripButton();
             this.tEnglish = new System.Windows.Forms.ToolStripButton();
             this.tPolish = new System.Windows.Forms.ToolStripButton();
-            this.tsbCompareWithMatlab = new System.Windows.Forms.ToolStripButton();
             this.chart = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.cmChart = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.cmChartSave = new System.Windows.Forms.ToolStripMenuItem();
@@ -78,6 +78,7 @@ namespace LearnByError
             this.nnNumber = new System.Windows.Forms.ToolStripMenuItem();
             this.toolNN = new System.Windows.Forms.ToolStripComboBox();
             this.times = new System.Windows.Forms.Label();
+            this.std = new System.Windows.Forms.Label();
             this.menu.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
@@ -355,14 +356,16 @@ namespace LearnByError
             this.tsHistory.Size = new System.Drawing.Size(52, 52);
             this.tsHistory.Click += new System.EventHandler(this.tsHistory_Click);
             // 
-            // toolExit
+            // tsbCompareWithMatlab
             // 
-            this.toolExit.Image = global::LearnByError.Properties.Resources.exit;
-            this.toolExit.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.toolExit.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolExit.Name = "toolExit";
-            this.toolExit.Size = new System.Drawing.Size(52, 52);
-            this.toolExit.Click += new System.EventHandler(this.toolExit_Click);
+            this.tsbCompareWithMatlab.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tsbCompareWithMatlab.Image = global::LearnByError.Properties.Resources.matlab;
+            this.tsbCompareWithMatlab.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.tsbCompareWithMatlab.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbCompareWithMatlab.Name = "tsbCompareWithMatlab";
+            this.tsbCompareWithMatlab.Size = new System.Drawing.Size(52, 52);
+            this.tsbCompareWithMatlab.Text = "Użyj danych poczatkowych z NBN MatLab";
+            this.tsbCompareWithMatlab.Click += new System.EventHandler(this.tsbCompareWithMatlab_Click);
             // 
             // tsbReasearchLearn
             // 
@@ -374,6 +377,15 @@ namespace LearnByError
             this.tsbReasearchLearn.Size = new System.Drawing.Size(52, 52);
             this.tsbReasearchLearn.Text = "Uruchom uczenie z zapisem";
             this.tsbReasearchLearn.Click += new System.EventHandler(this.tsbReasearchLearn_Click);
+            // 
+            // toolExit
+            // 
+            this.toolExit.Image = global::LearnByError.Properties.Resources.exit;
+            this.toolExit.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.toolExit.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolExit.Name = "toolExit";
+            this.toolExit.Size = new System.Drawing.Size(52, 52);
+            this.toolExit.Click += new System.EventHandler(this.toolExit_Click);
             // 
             // tEnglish
             // 
@@ -396,17 +408,6 @@ namespace LearnByError
             this.tPolish.Size = new System.Drawing.Size(52, 52);
             this.tPolish.Text = "Polski";
             this.tPolish.Click += new System.EventHandler(this.tPolish_Click);
-            // 
-            // tsbCompareWithMatlab
-            // 
-            this.tsbCompareWithMatlab.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.tsbCompareWithMatlab.Image = global::LearnByError.Properties.Resources.matlab;
-            this.tsbCompareWithMatlab.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.tsbCompareWithMatlab.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tsbCompareWithMatlab.Name = "tsbCompareWithMatlab";
-            this.tsbCompareWithMatlab.Size = new System.Drawing.Size(52, 52);
-            this.tsbCompareWithMatlab.Text = "Użyj danych poczatkowych z NBN MatLab";
-            this.tsbCompareWithMatlab.Click += new System.EventHandler(this.tsbCompareWithMatlab_Click);
             // 
             // chart
             // 
@@ -510,12 +511,23 @@ namespace LearnByError
             this.times.Size = new System.Drawing.Size(0, 20);
             this.times.TabIndex = 8;
             // 
+            // std
+            // 
+            this.std.AutoSize = true;
+            this.std.BackColor = System.Drawing.Color.White;
+            this.std.Dock = System.Windows.Forms.DockStyle.Top;
+            this.std.Location = new System.Drawing.Point(0, 91);
+            this.std.Name = "std";
+            this.std.Size = new System.Drawing.Size(0, 15);
+            this.std.TabIndex = 9;
+            // 
             // LearnByErrorMainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = global::LearnByError.Properties.Resources.background;
             this.ClientSize = new System.Drawing.Size(871, 687);
+            this.Controls.Add(this.std);
             this.Controls.Add(this.times);
             this.Controls.Add(this.chart);
             this.Controls.Add(this.toolStrip1);
@@ -591,6 +603,7 @@ namespace LearnByError
         private System.Windows.Forms.ToolStripMenuItem testForData;
         private System.Windows.Forms.ToolStripButton tsbReasearchLearn;
         private System.Windows.Forms.ToolStripButton tsbCompareWithMatlab;
+        private System.Windows.Forms.Label std;
     }
 }
 

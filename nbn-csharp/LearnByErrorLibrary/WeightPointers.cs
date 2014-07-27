@@ -52,25 +52,11 @@ namespace LearnByErrorLibrary
                 }                
             }
 
-            //iw.Add(i-1);
             iw.Add(i);//otherwise error calculation will be wrong
 
             Index ip = new Index(iw.Count);
             ip.Data[0] = iw.ToArray();
             return ip;
-
-            /*
-             function iw = findiw(topo)
-                nmax=0; j=0;
-                for i=1:length(topo),
-                    if topo(i)>nmax,
-                        nmax=topo(i);
-                        j=j+1; iw(j)=i;
-                    end;
-                end;
-                iw(j+1)=i+1;
-                return
-             */
         }
 
         /// <summary>

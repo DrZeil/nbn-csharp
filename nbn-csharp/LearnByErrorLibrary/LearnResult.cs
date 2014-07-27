@@ -56,6 +56,11 @@ namespace LearnByErrorLibrary
         public List<double[]> RMSE { get; set; }
 
         /// <summary>
+        /// Root mean square errors
+        /// </summary>
+        public List<double> TestingRmseList = new List<double>();
+
+        /// <summary>
         /// Activation function
         /// </summary>
         public double[] ActivationFunction { get; set; }
@@ -74,6 +79,30 @@ namespace LearnByErrorLibrary
         /// Test RMSE
         /// </summary>
         public double TestRMSE { get; set; }
+
+        public double StandardDeviation
+        {
+            get
+            {
+                List<double> last = new List<double>();
+                foreach (var r in RMSE)
+                {
+                    last.Add(r[r.Length - 1]);           
+                }
+
+                return last.ToArray().GetStandardDeviation();
+             
+            }
+        }
+
+        public double StandardDeviationTest
+        {
+            get
+            {
+                return TestingRmseList.ToArray().GetStandardDeviation();
+
+            }
+        }
 
         /// <summary>
         /// Last RMSE from learning process

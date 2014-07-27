@@ -77,7 +77,7 @@ namespace LearnByErrorLibrary
             FunctionRD rd = new FunctionRD();
             switch (function)
             {
-                case FunctionChoice.LinearNeuron:
+                case FunctionChoice.LinearNeuron://for output layer
                     {
                         rd.FunctionResult = gain.Data[0][n] * net;
                         rd.FunctionDerivative = gain.Data[0][n];
@@ -89,10 +89,10 @@ namespace LearnByErrorLibrary
                         rd.FunctionDerivative = gain.Data[0][n] * (1 - rd.FunctionResult) * rd.FunctionResult;
                     }break;
 
-                case FunctionChoice.BipolarNeuron:
+                case FunctionChoice.BipolarNeuron://for hidden layer
                     {
                         rd.FunctionResult = System.Math.Tanh(gain.Data[0][n] * net);
-                        rd.FunctionDerivative = gain.Data[0][n] * (1 - rd.FunctionResult * rd.FunctionResult);
+                        rd.FunctionDerivative = gain.Data[0][n] * (1 - System.Math.Pow(rd.FunctionResult,2));
                     }break;
 
                 case FunctionChoice.BipolarElliotNeuron:

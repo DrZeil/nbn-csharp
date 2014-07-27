@@ -10,38 +10,6 @@ using System.IO;
 namespace LearnByErrorLibrary
 {
     /// <summary>
-    /// NBN version
-    /// </summary>
-    public enum VersionNBN
-    {
-        /// <summary>
-        /// First version of NBN
-        /// </summary>
-        First = 1
-    }
-
-    /// <summary>
-    /// Train result
-    /// </summary>
-    public class TrainResult
-    {        
-        /// <summary>
-        /// Weigths - trained weights
-        /// </summary>
-        public Weights weights { get; set; }
-
-        /// <summary>
-        /// Number of iterations
-        /// </summary>
-        public int iterations { get; set; }
-
-        /// <summary>
-        /// Received SSE
-        /// </summary>
-        public double sse { get; set; }
-    }
-
-    /// <summary>
     /// Neuron by neuron in C#
     /// </summary>
     public class NBN
@@ -656,8 +624,6 @@ namespace LearnByErrorLibrary
 
                     for(int jw = 0; jw < 30; jw++)
                     {
-                        //ww = ww_backup - ((hessian+mu*I)\gradient)';
-                       //  var diff = ((hessian.HessianMat + (I * setting.MU)).Inverted * hessian.GradientMat).Transposed;
                         var diff = (hessian.HessianMat + (I * setting.MU)).SolveEquatation(hessian.GradientMat).Transposed;
 
                         if (OnDebug != null)
@@ -679,7 +645,7 @@ namespace LearnByErrorLibrary
 
                         if (OnDebug != null) debug("\r\nSSE[" + result.iterations.ToString() + "] = " + error.Error.ToString());
 
-                        if (error.Error <= SSE.PreviousSSE(result.iterations))
+                        if (SSE.CurrentSSE() <= SSE.PreviousSSE(result.iterations))
                         {
                             if (setting.MU > setting.MUL)
                             {
@@ -695,7 +661,7 @@ namespace LearnByErrorLibrary
 
                     }
 
-                    double rmse = Math.Sqrt(((double)SSE[result.iterations]) / inp.Rows);
+                    double rmse = Math.Sqrt((SSE.CurrentSSE()) / inp.Rows);
 
                     RMSE[result.iterations] = rmse;
                     updateChart(result.iterations, rmse);
@@ -844,6 +810,9 @@ namespace LearnByErrorLibrary
 
                 tic();//learn time measure start
 
+                settings = null;
+                settings = NeuralNetworkSettings.Default();
+
                 var tr = Train(ref this.settings, ref this.info, ref this.inputLearn, ref this.outputLearn,
                                ref this.topo, initialWeights, ref act, ref gain, ref indexes);
 
@@ -868,18 +837,16 @@ namespace LearnByErrorLibrary
                 NetworkInfo infoTest = info.Copy();
                 infoTest.np = inputTest.Rows;
 
-                tic();//test time measure start
+                tic();
 
-                //potem usunąć
-                //tr.weights = MatrixMB.Load("C:\\Users\\marekbar1985\\Desktop\\parity3\\wytrenowane_wagi_dla_parity3.dat").ToWeights();
                 error.CalculateError(ref infoTest, ref inputTest, ref outputTest, ref topo, tr.weights, ref act, ref gain, ref indexes);
 
-                var TestExecutionTime = toc();//test time measure stop
-                TestTimeList = time.ElapsedTicks;//test time measure save
+                var TestExecutionTime = toc();
+                TestTimeList = time.ElapsedTicks;
 
                 result.TestRMSE = Math.Sqrt(error.Error / infoTest.np);
-                TestRmseList = result.TestRMSE;//save test rmse from this trial
-
+                TestRmseList = result.TestRMSE;
+                result.TestingRmseList.Add(result.TestRMSE);
                 if (OnDebug != null)
                 {
                     debug("\r\nTest execution time: " + TestExecutionTime + "(hours:minutes:seconds:miliseconds)\r\n");
@@ -892,6 +859,7 @@ namespace LearnByErrorLibrary
 
             result.LearnRMSE = AverageLearnRMSE;
             result.TestRMSE = AverageTestRMSE;
+                        
             result.setStatisticsData(LearnRMSE, TestRMSE, LearnTime, TestTime, Trials);
             result.SuccessRate = IsTrainOK / Trials;
 

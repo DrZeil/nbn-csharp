@@ -13,7 +13,7 @@
     <FileAlignment>512</FileAlignment>
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <TargetFrameworkProfile />
-    <PublishUrl>C:\Users\marekbar1985\Desktop\nbn setup\</PublishUrl>
+    <PublishUrl>E:\Dokumenty\Praca magisterska\CD\Aplikacja\Instalator\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
     <UpdateEnabled>false</UpdateEnabled>
@@ -23,10 +23,15 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
+    <SupportUrl>https://sites.google.com/site/neuralnetworknbn/</SupportUrl>
+    <ErrorReportUrl>https://sites.google.com/site/neuralnetworknbn/</ErrorReportUrl>
+    <ProductName>NBN C#</ProductName>
     <PublisherName>Marek Bar</PublisherName>
-    <ApplicationRevision>11</ApplicationRevision>
+    <AutorunEnabled>true</AutorunEnabled>
+    <ApplicationRevision>12</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
+    <CreateDesktopShortcut>true</CreateDesktopShortcut>
     <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
@@ -435,7 +440,7 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties IncrementOnRebuild="True" IncrementOnBuild="True" IncrementAction="3" Versioning="1" StartAt="2/16/2014 3:10:15 PM" />
+      <UserProperties StartAt="2/16/2014 3:10:15 PM" Versioning="1" IncrementAction="3" IncrementOnBuild="True" IncrementOnRebuild="True" />
     </VisualStudio>
   </ProjectExtensions>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

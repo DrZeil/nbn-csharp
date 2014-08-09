@@ -32,5 +32,41 @@ namespace LearnByError.Properties {
                 return ((string)(this["DatabaseConnectionString"]));
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("10")]
+        public int AxisTitleFontSize {
+            get {
+                return ((int)(this["AxisTitleFontSize"]));
+            }
+            set {
+                this["AxisTitleFontSize"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Black")]
+        public global::System.Drawing.Color AxisTitleFontColor {
+            get {
+                return ((global::System.Drawing.Color)(this["AxisTitleFontColor"]));
+            }
+            set {
+                this["AxisTitleFontColor"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Arial, 9.75pt, style=Bold")]
+        public global::System.Drawing.Font AxisFont {
+            get {
+                return ((global::System.Drawing.Font)(this["AxisFont"]));
+            }
+            set {
+                this["AxisFont"] = value;
+            }
+        }
     }
 }

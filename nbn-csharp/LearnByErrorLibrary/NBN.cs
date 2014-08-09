@@ -625,7 +625,7 @@ namespace LearnByErrorLibrary
                     for(int jw = 0; jw < 30; jw++)
                     {
                         var diff = (hessian.HessianMat + (I * setting.MU)).SolveEquatation(hessian.GradientMat).Transposed;
-
+                        //((H + I * mu)\g)'
                         if (OnDebug != null)
                         {
                             debug("\r\nOdejmuję");

@@ -10,5 +10,14 @@
 &lt;/SerializableConnectionString&gt;</DesignTimeValue>
       <Value Profile="(Default)">Data Source=|DataDirectory|\Database.sdf</Value>
     </Setting>
+    <Setting Name="AxisTitleFontSize" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">10</Value>
+    </Setting>
+    <Setting Name="AxisTitleFontColor" Type="System.Drawing.Color" Scope="User">
+      <Value Profile="(Default)">Black</Value>
+    </Setting>
+    <Setting Name="AxisFont" Type="System.Drawing.Font" Scope="User">
+      <Value Profile="(Default)">Arial, 9.75pt, style=Bold</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

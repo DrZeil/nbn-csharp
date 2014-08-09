@@ -551,7 +551,7 @@ namespace LearnByError
                     int position = 1;
                     foreach (var sse in result.SSE[i])
                     {
-                        toolSSE.Items.Add(String.Format(Resource.Inst.Get("r183"), position, sse));
+                        toolSSE.Items.Add(String.Format(Resource.Inst.Get("r183"), position, Math.Round(sse,4).ToString().Replace(",",".")));
                         position++;
                     }
                 }
@@ -563,7 +563,7 @@ namespace LearnByError
                     int position = 1;
                     foreach (var rmse in result.RMSE[i])
                     {
-                        toolRMSE.Items.Add(String.Format(Resource.Inst.Get("r185"), position, rmse));
+                        toolRMSE.Items.Add(String.Format(Resource.Inst.Get("r185"), position, Math.Round(rmse, 4).ToString().Replace(",", ".")));
                         position++;
                     }
                 }
@@ -802,10 +802,12 @@ namespace LearnByError
                     chart.Series[title].ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
                     chart.Series[title].Points.AddXY(x, y);                    
                     chart.ChartAreas[0].AxisX.Title = Resource.Inst.Get("r23");
-                    chart.ChartAreas[0].AxisX.TitleForeColor = System.Drawing.Color.LightGray;
+                    chart.ChartAreas[0].AxisX.TitleFont = Properties.Settings.Default.AxisFont;
+                    chart.ChartAreas[0].AxisX.TitleForeColor = Properties.Settings.Default.AxisTitleFontColor;
                     chart.ChartAreas[0].AxisX.Minimum = 1;
                     chart.ChartAreas[0].AxisY.Title = Resource.Inst.Get("r24");
-                    chart.ChartAreas[0].AxisY.TitleForeColor = System.Drawing.Color.LightGray;
+                    chart.ChartAreas[0].AxisY.TitleFont = Properties.Settings.Default.AxisFont;
+                    chart.ChartAreas[0].AxisY.TitleForeColor = Properties.Settings.Default.AxisTitleFontColor;
                     chart.Update();
                 }
             }

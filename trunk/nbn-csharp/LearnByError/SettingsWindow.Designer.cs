@@ -45,6 +45,14 @@
             this.label1 = new System.Windows.Forms.Label();
             this.ebFolder = new LearnByError.EnterBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.cbFA = new System.Windows.Forms.ComboBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.tbGain = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.cbTopo = new System.Windows.Forms.ComboBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.nn = new System.Windows.Forms.ComboBox();
+            this.nnLabel = new System.Windows.Forms.Label();
             this.ebScale = new LearnByError.EnterBox();
             this.ebME = new LearnByError.EnterBox();
             this.ebMI = new LearnByError.EnterBox();
@@ -57,8 +65,6 @@
             this.toolExit = new System.Windows.Forms.ToolStripButton();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.status = new System.Windows.Forms.ToolStripStatusLabel();
-            this.nnLabel = new System.Windows.Forms.Label();
-            this.nn = new System.Windows.Forms.ComboBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -80,7 +86,6 @@
             // 
             // tabPage1
             // 
-            this.tabPage1.BackgroundImage = global::LearnByError.Properties.Resources.background;
             this.tabPage1.Controls.Add(this.buttonExportLang);
             this.tabPage1.Controls.Add(this.label4);
             this.tabPage1.Controls.Add(this.cbLang);
@@ -228,7 +233,12 @@
             // 
             // tabPage2
             // 
-            this.tabPage2.BackgroundImage = global::LearnByError.Properties.Resources.background;
+            this.tabPage2.Controls.Add(this.cbFA);
+            this.tabPage2.Controls.Add(this.label7);
+            this.tabPage2.Controls.Add(this.tbGain);
+            this.tabPage2.Controls.Add(this.label6);
+            this.tabPage2.Controls.Add(this.cbTopo);
+            this.tabPage2.Controls.Add(this.label5);
             this.tabPage2.Controls.Add(this.nn);
             this.tabPage2.Controls.Add(this.nnLabel);
             this.tabPage2.Controls.Add(this.ebScale);
@@ -244,6 +254,135 @@
             this.tabPage2.Size = new System.Drawing.Size(732, 529);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // cbFA
+            // 
+            this.cbFA.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbFA.FormattingEnabled = true;
+            this.cbFA.Items.AddRange(new object[] {
+            "Liniowa",
+            "Miękka jednostronna",
+            "Miękka obustronna",
+            "Miękka II jednostronna",
+            "Miękka || obustronna"});
+            this.cbFA.Location = new System.Drawing.Point(466, 148);
+            this.cbFA.Name = "cbFA";
+            this.cbFA.Size = new System.Drawing.Size(244, 24);
+            this.cbFA.TabIndex = 16;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(463, 129);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(116, 16);
+            this.label7.TabIndex = 15;
+            this.label7.Text = "Funkcja aktywacji:";
+            // 
+            // tbGain
+            // 
+            this.tbGain.Location = new System.Drawing.Point(466, 88);
+            this.tbGain.Name = "tbGain";
+            this.tbGain.Size = new System.Drawing.Size(244, 22);
+            this.tbGain.TabIndex = 14;
+            this.tbGain.TextChanged += new System.EventHandler(this.tbGain_TextChanged);
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(463, 68);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(145, 16);
+            this.label6.TabIndex = 13;
+            this.label6.Text = "Wzmocnienie sygnału:";
+            // 
+            // cbTopo
+            // 
+            this.cbTopo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbTopo.FormattingEnabled = true;
+            this.cbTopo.Items.AddRange(new object[] {
+            "BMLP - mostkowany wielowarstwowy perceptron",
+            "MLP - wielowarstwowy perceptron"});
+            this.cbTopo.Location = new System.Drawing.Point(466, 26);
+            this.cbTopo.Name = "cbTopo";
+            this.cbTopo.Size = new System.Drawing.Size(244, 24);
+            this.cbTopo.TabIndex = 12;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(463, 7);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(105, 16);
+            this.label5.TabIndex = 11;
+            this.label5.Text = "Topologia sieci:";
+            // 
+            // nn
+            // 
+            this.nn.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.nn.FormattingEnabled = true;
+            this.nn.Items.AddRange(new object[] {
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9",
+            "10",
+            "11",
+            "12",
+            "13",
+            "14",
+            "15",
+            "16",
+            "17",
+            "18",
+            "19",
+            "20",
+            "21",
+            "22",
+            "23",
+            "24",
+            "25",
+            "26",
+            "27",
+            "28",
+            "29",
+            "30",
+            "31",
+            "32",
+            "33",
+            "34",
+            "35",
+            "36",
+            "37",
+            "38",
+            "39",
+            "40",
+            "41",
+            "42",
+            "43",
+            "44",
+            "45",
+            "46",
+            "47",
+            "48",
+            "49",
+            "50"});
+            this.nn.Location = new System.Drawing.Point(124, 382);
+            this.nn.Name = "nn";
+            this.nn.Size = new System.Drawing.Size(316, 24);
+            this.nn.TabIndex = 10;
+            // 
+            // nnLabel
+            // 
+            this.nnLabel.AutoSize = true;
+            this.nnLabel.Location = new System.Drawing.Point(7, 385);
+            this.nnLabel.Name = "nnLabel";
+            this.nnLabel.Size = new System.Drawing.Size(0, 16);
+            this.nnLabel.TabIndex = 9;
             // 
             // ebScale
             // 
@@ -349,7 +488,6 @@
             // 
             // menu
             // 
-            this.menu.BackgroundImage = global::LearnByError.Properties.Resources.background;
             this.menu.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.menu.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
             this.menu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -387,7 +525,6 @@
             // 
             // statusStrip1
             // 
-            this.statusStrip1.BackgroundImage = global::LearnByError.Properties.Resources.background;
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.status});
             this.statusStrip1.Location = new System.Drawing.Point(0, 562);
@@ -402,38 +539,11 @@
             this.status.Name = "status";
             this.status.Size = new System.Drawing.Size(0, 17);
             // 
-            // nnLabel
-            // 
-            this.nnLabel.AutoSize = true;
-            this.nnLabel.Location = new System.Drawing.Point(7, 385);
-            this.nnLabel.Name = "nnLabel";
-            this.nnLabel.Size = new System.Drawing.Size(111, 16);
-            this.nnLabel.TabIndex = 9;            
-            // 
-            // nn
-            // 
-            this.nn.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.nn.FormattingEnabled = true;
-            this.nn.Items.AddRange(new object[] {
-            "2",
-            "3",
-            "4",
-            "5",
-            "6",
-            "7",
-            "8",
-            "9",
-            "10"});
-            this.nn.Location = new System.Drawing.Point(124, 382);
-            this.nn.Name = "nn";
-            this.nn.Size = new System.Drawing.Size(316, 24);
-            this.nn.TabIndex = 10;
-            // 
             // SettingsWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackgroundImage = global::LearnByError.Properties.Resources.background;
+            this.BackColor = System.Drawing.Color.WhiteSmoke;
             this.ClientSize = new System.Drawing.Size(769, 584);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.menu);
@@ -492,5 +602,11 @@
         private System.Windows.Forms.Button buttonExportLang;
         private System.Windows.Forms.ComboBox nn;
         private System.Windows.Forms.Label nnLabel;
+        private System.Windows.Forms.ComboBox cbTopo;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.TextBox tbGain;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.ComboBox cbFA;
+        private System.Windows.Forms.Label label7;
     }
 }

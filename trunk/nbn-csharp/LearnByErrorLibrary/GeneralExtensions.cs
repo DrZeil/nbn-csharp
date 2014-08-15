@@ -101,17 +101,21 @@ namespace LearnByErrorLibrary
 
         public static double GetStandardDeviation(this double[] data)
         {
-            double sum = 0;
-            double n = data.Length;
-            for (int i = 0; i < n; i++) sum += data[i];
-            double average = sum / n;
-            double s = 0;
-            for (int i = 0; i < n; i++)
+            try
             {
-                s = Math.Pow(data[i] - average, 2);
-            }
+                double sum = 0;
+                double n = data.Length;
+                for (int i = 0; i < n; i++) sum += data[i];
+                double average = sum / n;
+                double s = 0;
+                for (int i = 0; i < n; i++)
+                {
+                    s = Math.Pow(data[i] - average, 2);
+                }
 
-            return Math.Sqrt(s / (n - 1));
+                return Math.Sqrt(s / (n - 1));
+            }
+            catch { return 0; }
         }
 
     }

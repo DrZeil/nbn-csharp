@@ -37,7 +37,7 @@ namespace LearnByErrorLibrary
             get { return (int)Data[0][index]; }
             set { Data[0][index] = value; }
         }
-        
+
         /// <summary>
         /// Network topology constructor
         /// </summary>
@@ -66,6 +66,68 @@ namespace LearnByErrorLibrary
             }
         }
 
+        private static Topography MultiLayerPerceptron(ref VectorHorizontal lbl)
+        {
+            try
+            {
+                System.Collections.Generic.List<double> vals = new System.Collections.Generic.List<double>();
+                int nl = lbl.Length;
+                for (int i = 1; i < nl; i++)
+                {
+                    int lw = 0;
+                    for (int a = 0; a < i; a++) lw += (int)lbl[a];
+
+                    for (int j = 0; j < lbl[i]; j++)
+                    {
+                        vals.Add(lw + j);
+                        for (int k = (int)(lw - lbl[i - 1] + 1); k <= lw; k++)
+                        {
+                            vals.Add(k-1);
+                        }
+                    }
+                }
+
+                var topo = new Topography(vals.ToArray());
+                topo.Type = TopographyType.MLP;
+                return topo;
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
+        private static Topography BridgedMultiLayerPerceptron(ref VectorHorizontal lbl)
+        {
+            try
+            {
+                System.Collections.Generic.List<double> vals = new System.Collections.Generic.List<double>();
+                int nl = lbl.Length;
+                for (int i = 1; i < nl; i++)
+                {
+                    int s = lbl.Sum(0, i - 1).ToInt();
+                    for (int j = 0; j < lbl.getValue(i); j++)
+                    {
+                        vals.Add(s + j);
+                        double[] tmp = new double[s];
+                        for (int ii = 0; ii < s; ii++)
+                        {
+                            tmp[ii] = ii;
+                        }
+                        vals.AddRange(tmp);
+                    }
+                }
+
+                var topo = new Topography(vals.ToArray());
+                topo.Type = TopographyType.BMLP;
+                return topo;
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
         /// <summary>
         /// Generate network topography
         /// </summary>
@@ -74,45 +136,11 @@ namespace LearnByErrorLibrary
         /// <returns>Topography - generated topography</returns>
         public static Topography Generate(TopographyType type, VectorHorizontal lbl)
         {
-            try
-            {                
-                System.Collections.Generic.List<double> vals = new System.Collections.Generic.List<double>();
-                int nl = lbl.Length;
-                for (int i = 1; i < nl; i++)
-                {
-                    int s = lbl.Sum(0, i - 1).ToInt();
-                    for (int j = 0; j < lbl.getValue(i); j++)
-                    {
-                        switch (type)
-                        {
-                            case TopographyType.MLP://doesn not work properly
-                                {
-                                    vals.Add(s + j);
-                                    vals.AddRange(lbl.GetRange(s - lbl.getValue(i - 1).ToInt() + 1, s));
-                                } //MLP
-                                break;
-
-                            case TopographyType.BMLP:
-                                {
-                                    vals.Add(s + j);
-                                    double[] tmp = new double[s];
-                                    for (int ii = 0; ii < s; ii++)
-                                    {
-                                        tmp[ii] = ii;// ii + 1;
-                                    }
-                                    vals.AddRange(tmp);
-                                }//BMLP
-                                break;
-                        }//switch
-                    }//inner for
-                }//first for
-                var topo = new Topography(vals.ToArray());
-                topo.Type = type;
-                return topo;
-            }
-            catch (Exception)
+            switch (type)
             {
-                return null;
+                case TopographyType.BMLP: return BridgedMultiLayerPerceptron(ref lbl);
+                case TopographyType.MLP: return MultiLayerPerceptron(ref lbl);
+                default: return null;//oops, not implemented
             }
         }//generate
 
@@ -130,7 +158,7 @@ namespace LearnByErrorLibrary
             String tmp = "";
             for (int i = 0; i < Length; i++)
             {
-                tmp += this.Data[0][i].ToString() + (i == Length-1 ? "" : ", ");
+                tmp += this.Data[0][i].ToString() + (i == Length - 1 ? "" : ", ");
             }
             sb.AppendLine(tmp);
             sb.AppendLine("------------------------------------------------------------");

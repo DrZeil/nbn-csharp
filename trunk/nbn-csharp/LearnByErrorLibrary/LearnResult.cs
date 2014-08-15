@@ -84,14 +84,17 @@ namespace LearnByErrorLibrary
         {
             get
             {
-                List<double> last = new List<double>();
-                foreach (var r in RMSE)
+                try
                 {
-                    last.Add(r[r.Length - 1]);           
-                }
+                    List<double> last = new List<double>();
+                    foreach (var r in RMSE)
+                    {
+                        last.Add(r[r.Length - 1]);
+                    }
 
-                return last.ToArray().GetStandardDeviation();
-             
+                    return last.ToArray().GetStandardDeviation();
+                }
+                catch { return 0; }
             }
         }
 
@@ -100,7 +103,6 @@ namespace LearnByErrorLibrary
             get
             {
                 return TestingRmseList.ToArray().GetStandardDeviation();
-
             }
         }
 

@@ -462,6 +462,11 @@ namespace LearnByError
                 if (inputDataFilename == "") return;
                 blockInterface();
                 NBN nbn = new NBN(app.NeuronNumber, inputDataFilename);
+                
+                nbn.NBN_Gain = app.Gain;
+                nbn.NBN_Activation = app.ActivationFunction;
+                nbn.NBN_Topography = app.TopologyType;
+
                 nbn.IsResearchMode = IsResearch;
                 nbn.MatLabCompareDataFolder = MatLabCompareDataFolder;
                 string tmpMLF = MatLabCompareDataFolder;
@@ -504,12 +509,13 @@ namespace LearnByError
                         w.WriteLine(string.Format("Średnie RMSE testowania: {0}", result.AverageTestRMSE));
                         w.WriteLine(string.Format("Średnie czas uczenia: {0}", result.AverageLearnTime));
                         w.WriteLine(string.Format("Średnie czas testowania: {0}", result.AverageTestTime));
-                        w.WriteLine(string.Format("Odchylenie standardowe uczenia: {0}", result.StandardDeviation));
-                        w.WriteLine(string.Format("Odchylenie standardowe testowania: {0}", result.StandardDeviationTest));
+                        w.WriteLine(string.Format("Odchylenie standardowe uczenia: {0}", double.IsNaN(result.StandardDeviation) ? 0 : result.StandardDeviation));
+                        w.WriteLine(string.Format("Odchylenie standardowe testowania: {0}", double.IsNaN(result.StandardDeviationTest) ? 0 : result.StandardDeviationTest));
+                        w.WriteLine(string.Format("Wskaźnik sukcesu: {0}", result.SuccessRate));
                     }
                 }
 
-                std.Text = string.Format("Odchylenie standardowe uczenia: {0} oraz testowania: {1}", result.StandardDeviation, result.StandardDeviationTest);
+                std.Text = string.Format("Odchylenie standardowe uczenia: {0} oraz testowania: {1}", double.IsNaN(result.StandardDeviation) ? 0 : result.StandardDeviation, double.IsNaN(result.StandardDeviationTest) ? 0 : result.StandardDeviationTest);
                 String runResult = String.Format(Resource.Inst.Get("r29"), 
                     result.AverageLearnRMSE, result.AverageTestRMSE, result.Settings.MaxError);
 

@@ -305,6 +305,77 @@ namespace LearnByError
             }
         }
 
+
+        /// <summary>
+        /// Netowork topology type
+        /// </summary>
+        public int TopologyType
+        {
+            get
+            {
+                int val = 0;
+                if (int.TryParse(get("TOPOLOGY"), out val))
+                {
+                    return val;
+                }
+                else
+                {
+                    return 0;
+                }
+            }
+
+            set
+            {
+                set("TOPOLOGY", value.ToString());
+            }
+        }
+
+
+        /// <summary>
+        /// Activation function index
+        /// </summary>
+        public int ActivationFunction
+        {
+            get
+            {
+                int val = 2;
+                if (int.TryParse(get("FA"), out val))
+                {
+                    return val;
+                }
+                else
+                {
+                    return 2;
+                }
+            }
+
+            set
+            {
+                set("FA", value.ToString());
+            }
+        }
+
+        public double Gain
+        {
+            get
+            {
+                double val = 1;
+                if (double.TryParse(get("GAIN"), out val))
+                {
+                    return val;
+                }
+                else
+                {
+                    return 1;
+                }
+            }
+
+            set
+            {
+                set("GAIN", value.ToString());
+            }
+        }
+
         public LearnByError.Internazional.Languages Language
         {
             get

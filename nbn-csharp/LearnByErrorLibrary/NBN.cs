@@ -85,6 +85,10 @@ namespace LearnByErrorLibrary
         /// </summary>
         public NeuralNetworkSettings settings = NeuralNetworkSettings.Default();
 
+        public int NBN_Topography = 0;
+        public int NBN_Activation = 2;
+        public double NBN_Gain = 1;
+
         /// <summary>
         /// Number of trials - reado only
         /// </summary>
@@ -103,7 +107,7 @@ namespace LearnByErrorLibrary
         /// </summary>
         public bool IsResearchMode = false;
         private string extractionFolder = "";
-       
+        private MatrixMB I;
         #endregion
 
         #region STATISTICS
@@ -322,7 +326,7 @@ namespace LearnByErrorLibrary
         {
             time.Stop();
             return time.Elapsed.ToString();//"hh:mm:ss.ffff"
-            
+
         }
         #endregion
 
@@ -461,7 +465,7 @@ namespace LearnByErrorLibrary
         /// <param name="filename">String - filename</param>
         /// <returns>bool - success flag</returns>
         private bool loadInputData(String filename)
-        {           
+        {
             try
             {
                 if (!File.Exists(filename))
@@ -540,7 +544,7 @@ namespace LearnByErrorLibrary
                 updateErrorNBN(ex);
                 return false;
             }
-        }      
+        }
 
         /// <summary>
         /// Checks data
@@ -595,7 +599,7 @@ namespace LearnByErrorLibrary
                     debug(gain.ToString());
                 }
 
-                result.weights = initialWeights.Backup();   
+                result.weights = initialWeights.Backup();
 
                 error.CalculateError(ref info, ref inp, ref dout, ref topo, result.weights, ref act, ref gain, ref iw);
 
@@ -607,14 +611,14 @@ namespace LearnByErrorLibrary
                 SSE.Clear();
                 RMSE.Clear();
                 SSE[0] = result.sse = error.Error;
-                
-                var I = MatrixMB.Eye(info.nw);
+
+
 
                 hessians.Clear();
                 var hessian = new Hessian(ref info);
 
                 for (result.iterations = 1; result.iterations < setting.MaxIterations; result.iterations++)
-                {                                        
+                {
                     hessian.Compute(ref info, ref inp, ref dout, ref topo, result.weights, ref act, ref gain, ref iw);
 
                     if (OnDebug != null) debug(hessian.ToString());
@@ -622,7 +626,7 @@ namespace LearnByErrorLibrary
                     hessians.Add(hessian.HessianMat);
                     Weights ww_backup = result.weights.Backup();
 
-                    for(int jw = 0; jw < 30; jw++)
+                    for (int jw = 0; jw < 30; jw++)
                     {
                         var diff = (hessian.HessianMat + (I * setting.MU)).SolveEquatation(hessian.GradientMat).Transposed;
                         //((H + I * mu)\g)'
@@ -633,7 +637,7 @@ namespace LearnByErrorLibrary
                         }
                         result.weights = ww_backup - diff.ToWeights();
                         result.weights.Name = "Weights nr " + jw.ToString();
-                       
+
                         if (OnDebug != null)
                         {
                             bool areSame = result.weights.IsEqual(ww_backup);
@@ -671,11 +675,11 @@ namespace LearnByErrorLibrary
                         break;
                     }
 
-                                        
+
                     if (OnDebug != null) debug("Błąd: " + rmse.ToString());
 
-                    if(
-                        (SSE.PreviousSSE(result.iterations)-((double)SSE[result.iterations]))
+                    if (
+                        (SSE.PreviousSSE(result.iterations) - ((double)SSE[result.iterations]))
                         /
                         SSE.PreviousSSE(result.iterations)
                         <
@@ -742,7 +746,7 @@ namespace LearnByErrorLibrary
             //setting number of hidden neurons
             for (int i = 0; i < Handle; i++)
             {
-                tmp.Add(1); 
+                tmp.Add(1);
             }
             tmp.Add(1);
 
@@ -752,7 +756,20 @@ namespace LearnByErrorLibrary
                 vh[i] = tmp[i];
             }
 
-            topo = Topography.Generate(TopographyType.BMLP, vh);
+            switch (NBN_Topography)
+            {
+                case 0:
+                    {
+                        topo = Topography.Generate(TopographyType.BMLP, vh);
+                    } break;
+                case 1:
+                    {
+                        topo = Topography.Generate(TopographyType.MLP, vh);
+                    } break;
+            }
+
+
+
             result.Topo = topo.Data[0];
             if (OnDebug != null) debug(topo.ToString());
 
@@ -773,12 +790,12 @@ namespace LearnByErrorLibrary
             }
 
             Activation act = new Activation(info.nn);
-            act.FillWithNumber(2);
+            act.FillWithNumber(NBN_Activation);
             act.setValue(info.nn - 1, 0);
             result.ActivationFunction = act.Data[0];
 
             Gain gain = new Gain(info.nn);
-            gain.FillWithNumber(1);
+            gain.FillWithNumber(NBN_Gain);
             result.GainValue = gain.Data[0];
 
             result.Settings = this.settings;
@@ -788,17 +805,17 @@ namespace LearnByErrorLibrary
                 Weights initialWeights = new Weights(info.nw);
                 if (MatLabCompareDataFolder.Length > 0)
                 {
-                    initialWeights = MatrixMB.Load(string.Format("{0}\\poczatkowe_wagi_proba_{1}.txt", MatLabCompareDataFolder, trial+1)).ToWeights();
+                    initialWeights = MatrixMB.Load(string.Format("{0}\\poczatkowe_wagi_proba_{1}.txt", MatLabCompareDataFolder, trial + 1)).ToWeights();
                 }
                 else
                 {
                     initialWeights = Weights.Generate(info.nw);
                 }
-                
+
                 if (IsResearchMode)
-                {                    
+                {
                     string initialWeightsFile = String.Format("{0}\\{1}{2}_initial_weights.dat", _reasearch_folder, trial, Path.GetFileNameWithoutExtension(result.Filename));
-                    initialWeights.Store(initialWeightsFile);                    
+                    initialWeights.Store(initialWeightsFile);
                 }
 
                 initialWeights.Name = "Initial";
@@ -808,11 +825,11 @@ namespace LearnByErrorLibrary
                     debug(initialWeights.ToString());
                 }
 
-                tic();//learn time measure start
-
                 settings = null;
                 settings = NeuralNetworkSettings.Default();
+                I = MatrixMB.Eye(info.nw);
 
+                tic();//learn time measure start
                 var tr = Train(ref this.settings, ref this.info, ref this.inputLearn, ref this.outputLearn,
                                ref this.topo, initialWeights, ref act, ref gain, ref indexes);
 
@@ -823,7 +840,7 @@ namespace LearnByErrorLibrary
 
                 result.LearnRMSE = (double)RMSE[RMSE.Count];
                 LearnRmseList = LastRMSE;
-                
+
                 if (OnDebug != null)
                 {
                     debug(tr.weights.ToString());
@@ -859,7 +876,7 @@ namespace LearnByErrorLibrary
 
             result.LearnRMSE = AverageLearnRMSE;
             result.TestRMSE = AverageTestRMSE;
-                        
+
             result.setStatisticsData(LearnRMSE, TestRMSE, LearnTime, TestTime, Trials);
             result.SuccessRate = IsTrainOK / Trials;
 
@@ -942,7 +959,7 @@ namespace LearnByErrorLibrary
                 chart.Series[title].Points.AddXY(x, y);
                 chart.Series[title].Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.BrightPastel;
                 chart.Series[title].MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Diamond;
-                
+
                 chart.ChartAreas[0].AxisX.Title = "Epoka";
                 chart.ChartAreas[0].AxisX.TitleForeColor = System.Drawing.Color.LightGray;
                 chart.ChartAreas[0].AxisX.Minimum = 1;

@@ -65,6 +65,9 @@ namespace LearnByError
                 s.LearnTrials = cbTrials.SelectedIndex + 1;
                 s.Language = (Internazional.Languages)cbLang.SelectedIndex;
                 s.NeuronNumber = nn.SelectedIndex + 1;
+                s.TopologyType = cbTopo.SelectedIndex;
+                s.ActivationFunction = cbFA.SelectedIndex;
+                s.Gain = double.Parse(tbGain.Text);
             }
             catch (Exception ex)
             {
@@ -96,6 +99,9 @@ namespace LearnByError
                 cbTrials.SelectedIndex = s.LearnTrials - 1;
                 cbLang.SelectedIndex = (int)s.Language;
                 nn.SelectedIndex = s.NeuronNumber - 1;
+                cbTopo.SelectedIndex = s.TopologyType;
+                tbGain.Text = s.Gain.ToString().Replace(",", ".");
+                cbFA.SelectedIndex = s.ActivationFunction;
                 logsStat();
                 learnStat();
             }
@@ -203,6 +209,8 @@ namespace LearnByError
                 ebScale.Value = "10";
                 ebME.Value = "0.001";
                 ebMI.Value = "10";
+                cbTopo.SelectedIndex = 0;
+                tbGain.Text = "1";
                 toolSave_Click(sender, e);
             }
         }
@@ -224,6 +232,12 @@ namespace LearnByError
                 System.Diagnostics.Process.Start(filename);
             }
             catch { }
+        }
+
+        private void tbGain_TextChanged(object sender, EventArgs e)
+        {
+            double d = 1;
+            if (!double.TryParse(tbGain.Text, out d)) tbGain.Text = "";
         }
     }
 }

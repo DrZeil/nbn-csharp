@@ -467,6 +467,7 @@ namespace LearnByError
                 nbn.NBN_Activation = app.ActivationFunction;
                 nbn.NBN_Topography = app.TopologyType;
                 nbn.Threshold = app.Threshold;
+                nbn.IsClassification = app.IsClassification;
 
                 nbn.IsResearchMode = IsResearch;
                 nbn.MatLabCompareDataFolder = MatLabCompareDataFolder;
@@ -484,12 +485,14 @@ namespace LearnByError
                         SetDebug(msg);
                     };
                 }
-                nbn.OnChartUpdate += (s, title, x, y) =>
+                if (app.DontDrawChart == false)
                 {
+                    nbn.OnChartUpdate += (s, title, x, y) =>
+                    {
 
-                    SetChart(title, x, y);
-                };
-
+                        SetChart(title, x, y);
+                    };
+                }
                 if (app.ShowConsole)
                 {
                     console = new DebugConsole();

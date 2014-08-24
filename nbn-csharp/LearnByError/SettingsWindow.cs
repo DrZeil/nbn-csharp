@@ -69,6 +69,8 @@ namespace LearnByError
                 s.ActivationFunction = cbFA.SelectedIndex;
                 s.Gain = double.Parse(tbGain.Text);
                 s.Threshold = double.Parse(thresh.Text);
+                s.IsClassification = is_classification.Checked;
+                s.DontDrawChart = no_chart.Checked;
             }
             catch (Exception ex)
             {
@@ -104,6 +106,8 @@ namespace LearnByError
                 tbGain.Text = s.Gain.ToString().Replace(",", ".");
                 cbFA.SelectedIndex = s.ActivationFunction;
                 thresh.Text = s.Threshold.ToString();
+                is_classification.Checked = s.IsClassification;
+                no_chart.Checked = s.DontDrawChart;
                 logsStat();
                 learnStat();
             }

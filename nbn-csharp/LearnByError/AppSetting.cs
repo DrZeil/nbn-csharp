@@ -261,6 +261,51 @@ namespace LearnByError
         }
 
         /// <summary>
+        /// Learning process console visibility
+        /// </summary>
+        public bool DontDrawChart
+        {
+            get
+            {
+                int val = 0;
+                if (int.TryParse(get("NOCHART"), out val))
+                {
+                    return val == 1;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+
+            set
+            {
+                set("NOCHART", (value ? 1 : 0).ToString());
+            }
+        }
+
+        public bool IsClassification
+        {
+            get
+            {
+                int val = 0;
+                if (int.TryParse(get("KLASYFIKACJA"), out val))
+                {
+                    return val == 1;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+
+            set
+            {
+                set("KLASYFIKACJA", (value ? 1 : 0).ToString());
+            }
+        }
+
+        /// <summary>
         /// Auto save learning process results
         /// </summary>
         public bool AutoSaveLearningResults

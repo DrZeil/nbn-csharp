@@ -1,0 +1,453 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{E1EF15DB-4761-4CDA-ACC4-17740A28A6B4}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>LearnByError</RootNamespace>
+    <AssemblyName>NBN CSharp</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <TargetFrameworkProfile />
+    <PublishUrl>E:\Dokumenty\Praca magisterska\CD\Aplikacja\Instalator\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <SupportUrl>https://sites.google.com/site/neuralnetworknbn/</SupportUrl>
+    <ErrorReportUrl>https://sites.google.com/site/neuralnetworknbn/</ErrorReportUrl>
+    <ProductName>NBN C#</ProductName>
+    <PublisherName>Marek Bar</PublisherName>
+    <AutorunEnabled>true</AutorunEnabled>
+    <ApplicationRevision>15</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <CreateDesktopShortcut>true</CreateDesktopShortcut>
+    <PublishWizardCompleted>true</PublishWizardCompleted>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+    <DocumentationFile>bin\Release\NBN CSharp.XML</DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestCertificateThumbprint>00018218853C0B30FE3D03291C79C27C8D816667</ManifestCertificateThumbprint>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestKeyFile>LearnByError_TemporaryKey.pfx</ManifestKeyFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <GenerateManifests>true</GenerateManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignManifests>true</SignManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>run.ico</ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="MigraDoc.DocumentObjectModel">
+      <HintPath>..\LearnByErrorLibrary\MigraDoc.DocumentObjectModel.dll</HintPath>
+    </Reference>
+    <Reference Include="MigraDoc.Rendering">
+      <HintPath>..\LearnByErrorLibrary\MigraDoc.Rendering.dll</HintPath>
+    </Reference>
+    <Reference Include="PdfSharp">
+      <HintPath>..\LearnByErrorLibrary\PdfSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Data.SQLite, Version=1.0.92.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\System.Data.SQLite.Core.1.0.92.0\lib\net45\System.Data.SQLite.dll</HintPath>
+    </Reference>
+    <Reference Include="System.DirectoryServices" />
+    <Reference Include="System.IO.Compression.FileSystem" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Windows.Forms.DataVisualization" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AboutBox.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AboutBox.Designer.cs">
+      <DependentUpon>AboutBox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AnalyseNBN.cs" />
+    <Compile Include="AppExtensions.cs" />
+    <Compile Include="AppSetting.cs" />
+    <Compile Include="Common.cs" />
+    <Compile Include="Database\DatabasePatch.cs" />
+    <Compile Include="Database\Manager.cs" />
+    <Compile Include="Database\Patch.cs" />
+    <Compile Include="Database\SQL.cs" />
+    <Compile Include="Database\Table.cs" />
+    <Compile Include="Database\Tables\History.cs" />
+    <Compile Include="Database\Tables\KeyValue.cs" />
+    <Compile Include="Database\Tables\Log.cs" />
+    <Compile Include="DebugConsole.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DebugConsole.Designer.cs">
+      <DependentUpon>DebugConsole.cs</DependentUpon>
+    </Compile>
+    <Compile Include="EnterBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Form1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form1.Designer.cs">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form1.Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Form1.Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Gmail.cs" />
+    <Compile Include="GridWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GridWindow.Designer.cs">
+      <DependentUpon>GridWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="HistoryWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="HistoryWindow.Designer.cs">
+      <DependentUpon>HistoryWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="InstructionWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="InstructionWindow.Designer.cs">
+      <DependentUpon>InstructionWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Internazional\Languages.cs" />
+    <Compile Include="Internazional\Lang\English.cs" />
+    <Compile Include="Internazional\Lang\Polish.cs" />
+    <Compile Include="Internazional\Resource.cs" />
+    <Compile Include="LogWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="LogWindow.Designer.cs">
+      <DependentUpon>LogWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MailBox.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MailBox.Designer.cs">
+      <DependentUpon>MailBox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NeuronNumberWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="NeuronNumberWindow.Designer.cs">
+      <DependentUpon>NeuronNumberWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="RepeatWindowChoice.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RepeatWindowChoice.Designer.cs">
+      <DependentUpon>RepeatWindowChoice.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ReportData.cs" />
+    <Compile Include="ResearchNBN.cs" />
+    <Compile Include="ResearchWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ResearchWindow.Designer.cs">
+      <DependentUpon>ResearchWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SettingsWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SettingsWindow.Designer.cs">
+      <DependentUpon>SettingsWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TrainerResource.cs" />
+    <EmbeddedResource Include="AboutBox.resx">
+      <DependentUpon>AboutBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DebugConsole.resx">
+      <DependentUpon>DebugConsole.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form1.Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Form1.Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form1.resx">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GridWindow.resx">
+      <DependentUpon>GridWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="HistoryWindow.resx">
+      <DependentUpon>HistoryWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="InstructionWindow.resx">
+      <DependentUpon>InstructionWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LogWindow.resx">
+      <DependentUpon>LogWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MailBox.resx">
+      <DependentUpon>MailBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NeuronNumberWindow.resx">
+      <DependentUpon>NeuronNumberWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RepeatWindowChoice.resx">
+      <DependentUpon>RepeatWindowChoice.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ResearchWindow.resx">
+      <DependentUpon>ResearchWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SettingsWindow.resx">
+      <DependentUpon>SettingsWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="LearnByError_TemporaryKey.pfx" />
+    <None Include="packages.config" />
+    <None Include="Properties\DataSources\ReportData.datasource" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\LearnByErrorLibrary\LearnByErrorLibrary.csproj">
+      <Project>{3c5b2235-1b38-4824-a421-b783177b5eb7}</Project>
+      <Name>LearnByErrorLibrary</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\16_4_encoder.dat" />
+    <None Include="Resources\2spiral.dat" />
+    <None Include="Resources\3_8_decoder.dat" />
+    <None Include="Resources\4_16_decoder.dat" />
+    <None Include="Resources\8_3_encoder.dat" />
+    <None Include="Resources\abalone.dat" />
+    <None Include="Resources\and.dat" />
+    <None Include="Resources\auto_MPG.dat" />
+    <None Include="Resources\auto_price.dat" />
+    <None Include="Resources\boston_housing.dat" />
+    <None Include="Resources\cal_housing.dat" />
+    <None Include="Resources\control_surface.dat" />
+    <None Include="Resources\cube.dat" />
+    <None Include="Resources\delta_ailerons.dat" />
+    <None Include="Resources\delta_elevators.dat" />
+    <None Include="Resources\errorcorrection4.dat" />
+    <None Include="Resources\fuzzy_data%281%29.dat" />
+    <None Include="Resources\fuzzy_data.dat" />
+    <None Include="Resources\machine.dat" />
+    <None Include="Resources\or.dat" />
+    <None Include="Resources\parity10.dat" />
+    <None Include="Resources\parity11.dat" />
+    <None Include="Resources\parity12.dat" />
+    <None Include="Resources\parity13.dat" />
+    <None Include="Resources\parity14.dat" />
+    <None Include="Resources\parity15.dat" />
+    <None Include="Resources\parity16.dat" />
+    <None Include="Resources\parity17.dat" />
+    <None Include="Resources\parity2.dat" />
+    <None Include="Resources\parity3.dat" />
+    <None Include="Resources\parity4.dat" />
+    <None Include="Resources\parity5.dat" />
+    <None Include="Resources\parity6.dat" />
+    <None Include="Resources\parity7.dat" />
+    <None Include="Resources\parity8.dat" />
+    <None Include="Resources\parity9.dat" />
+    <None Include="Resources\peaks1000.dat" />
+    <None Include="Resources\peaks2000.dat" />
+    <None Include="Resources\peaks2000r.dat" />
+    <None Include="Resources\sample1.dat" />
+    <None Include="Resources\sample2.dat" />
+    <None Include="Resources\shamrock.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\logout.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\settings.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\info.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\documents_folder-512.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\binders_folder-512.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\burn_folder-512.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\dossier_folder-512.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\test2.dat" />
+    <None Include="Resources\user_folder-512.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\logo.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\napiszprogram.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\napiszprogram.gif" />
+    <None Include="Resources\poland.jpg" />
+    <None Include="Resources\english.jpg" />
+    <None Include="Resources\loader.gif" />
+    <None Include="Resources\that.png" />
+    <None Include="Resources\reasearch.png" />
+    <None Include="Resources\github_login_icon.gif" />
+    <None Include="Resources\www.png" />
+    <None Include="Resources\research.png" />
+    <None Include="Resources\open_file.png" />
+    <None Include="Resources\start1.png" />
+    <None Include="Resources\save1.png" />
+    <None Include="Resources\settings1.png" />
+    <None Include="Resources\history1.png" />
+    <None Include="Resources\exit.png" />
+    <None Include="Resources\britain.png" />
+    <None Include="Resources\poland.png" />
+    <None Include="Resources\matlab.png" />
+    <Content Include="run.ico" />
+    <Content Include="x64\SQLite.Interop.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="x86\SQLite.Interop.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <None Include="Resources\pdfpdf.png" />
+    <None Include="Resources\pdf.png" />
+    <None Include="Resources\logo.png" />
+    <None Include="Resources\delete.png" />
+    <None Include="Resources\right.png" />
+    <None Include="Resources\left.png" />
+    <None Include="Resources\history.png" />
+    <None Include="Resources\Filesystems-folder-open-icon.png" />
+    <None Include="Resources\darkdenim3.png" />
+    <None Include="Resources\lghtmesh.png" />
+    <None Include="Resources\background2.png" />
+    <None Include="Resources\background.png" />
+    <None Include="Resources\send.png" />
+    <None Include="Resources\down.png" />
+    <None Include="Resources\save.png" />
+    <None Include="Resources\start.png" />
+    <None Include="Resources\import-icon.png" />
+    <None Include="Resources\open.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.5">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.5 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.4.5">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 4.5</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <PublishFile Include="System.Data.SQLite">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Include</PublishState>
+      <IncludeHash>True</IncludeHash>
+      <FileType>Assembly</FileType>
+    </PublishFile>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <UserProperties IncrementOnRebuild="True" IncrementOnBuild="True" IncrementAction="3" Versioning="1" StartAt="2/16/2014 3:10:15 PM" />
+    </VisualStudio>
+  </ProjectExtensions>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

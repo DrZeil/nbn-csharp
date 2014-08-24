@@ -1,0 +1,34 @@
+E:\Dokumenty\Praca magisterska\CD\Kod źródłowy\NBN C#\LearnByError\bin\Release\NBN CSharp.exe.config
+E:\Dokumenty\Praca magisterska\CD\Kod źródłowy\NBN in C# source code\LearnByError\bin\Release\NBN CSharp.exe.config
+E:\Dokumenty\Praca magisterska\CD\Kod źródłowy\NBN in C# source code\LearnByError\bin\Release\x64\SQLite.Interop.dll
+E:\Dokumenty\Praca magisterska\CD\Kod źródłowy\NBN in C# source code\LearnByError\bin\Release\x86\SQLite.Interop.dll
+E:\Dokumenty\Praca magisterska\CD\Kod źródłowy\NBN in C# source code\LearnByError\bin\Release\NBN CSharp.exe.manifest
+E:\Dokumenty\Praca magisterska\CD\Kod źródłowy\NBN in C# source code\LearnByError\bin\Release\NBN CSharp.application
+E:\Dokumenty\Praca magisterska\CD\Kod źródłowy\NBN in C# source code\LearnByError\bin\Release\NBN CSharp.XML
+E:\Dokumenty\Praca magisterska\CD\Kod źródłowy\NBN in C# source code\LearnByError\bin\Release\NBN CSharp.exe
+E:\Dokumenty\Praca magisterska\CD\Kod źródłowy\NBN in C# source code\LearnByError\bin\Release\NBN CSharp.pdb
+E:\Dokumenty\Praca magisterska\CD\Kod źródłowy\NBN in C# source code\LearnByError\bin\Release\LearnByErrorLibrary.dll
+E:\Dokumenty\Praca magisterska\CD\Kod źródłowy\NBN in C# source code\LearnByError\bin\Release\System.Data.SQLite.dll
+E:\Dokumenty\Praca magisterska\CD\Kod źródłowy\NBN in C# source code\LearnByError\bin\Release\LearnByErrorLibrary.pdb
+E:\Dokumenty\Praca magisterska\CD\Kod źródłowy\NBN in C# source code\LearnByError\bin\Release\LearnByErrorLibrary.xml
+E:\Dokumenty\Praca magisterska\CD\Kod źródłowy\NBN in C# source code\LearnByError\bin\Release\System.Data.SQLite.xml
+E:\Dokumenty\Praca magisterska\CD\Kod źródłowy\NBN in C# source code\LearnByError\obj\Release\LearnByError.csprojResolveAssemblyReference.cache
+E:\Dokumenty\Praca magisterska\CD\Kod źródłowy\NBN in C# source code\LearnByError\obj\Release\LearnByError.AboutBox.resources
+E:\Dokumenty\Praca magisterska\CD\Kod źródłowy\NBN in C# source code\LearnByError\obj\Release\LearnByError.DebugConsole.resources
+E:\Dokumenty\Praca magisterska\CD\Kod źródłowy\NBN in C# source code\LearnByError\obj\Release\LearnByError.Form1.Resources.resources
+E:\Dokumenty\Praca magisterska\CD\Kod źródłowy\NBN in C# source code\LearnByError\obj\Release\LearnByError.LearnByErrorMainWindow.resources
+E:\Dokumenty\Praca magisterska\CD\Kod źródłowy\NBN in C# source code\LearnByError\obj\Release\LearnByError.GridWindow.resources
+E:\Dokumenty\Praca magisterska\CD\Kod źródłowy\NBN in C# source code\LearnByError\obj\Release\LearnByError.HistoryWindow.resources
+E:\Dokumenty\Praca magisterska\CD\Kod źródłowy\NBN in C# source code\LearnByError\obj\Release\LearnByError.InstructionWindow.resources
+E:\Dokumenty\Praca magisterska\CD\Kod źródłowy\NBN in C# source code\LearnByError\obj\Release\LearnByError.LogWindow.resources
+E:\Dokumenty\Praca magisterska\CD\Kod źródłowy\NBN in C# source code\LearnByError\obj\Release\LearnByError.MailBox.resources
+E:\Dokumenty\Praca magisterska\CD\Kod źródłowy\NBN in C# source code\LearnByError\obj\Release\LearnByError.NeuronNumberWindow.resources
+E:\Dokumenty\Praca magisterska\CD\Kod źródłowy\NBN in C# source code\LearnByError\obj\Release\LearnByError.Properties.Resources.resources
+E:\Dokumenty\Praca magisterska\CD\Kod źródłowy\NBN in C# source code\LearnByError\obj\Release\LearnByError.RepeatWindowChoice.resources
+E:\Dokumenty\Praca magisterska\CD\Kod źródłowy\NBN in C# source code\LearnByError\obj\Release\LearnByError.ResearchWindow.resources
+E:\Dokumenty\Praca magisterska\CD\Kod źródłowy\NBN in C# source code\LearnByError\obj\Release\LearnByError.SettingsWindow.resources
+E:\Dokumenty\Praca magisterska\CD\Kod źródłowy\NBN in C# source code\LearnByError\obj\Release\LearnByError.csproj.GenerateResource.Cache
+E:\Dokumenty\Praca magisterska\CD\Kod źródłowy\NBN in C# source code\LearnByError\obj\Release\NBN CSharp.exe.manifest
+E:\Dokumenty\Praca magisterska\CD\Kod źródłowy\NBN in C# source code\LearnByError\obj\Release\NBN CSharp.application
+E:\Dokumenty\Praca magisterska\CD\Kod źródłowy\NBN in C# source code\LearnByError\obj\Release\NBN CSharp.exe
+E:\Dokumenty\Praca magisterska\CD\Kod źródłowy\NBN in C# source code\LearnByError\obj\Release\NBN CSharp.pdb

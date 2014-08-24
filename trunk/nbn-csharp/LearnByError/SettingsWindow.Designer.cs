@@ -45,6 +45,9 @@
             this.label1 = new System.Windows.Forms.Label();
             this.ebFolder = new LearnByError.EnterBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.is_classification = new System.Windows.Forms.CheckBox();
+            this.thresh = new System.Windows.Forms.TextBox();
+            this.label8 = new System.Windows.Forms.Label();
             this.cbFA = new System.Windows.Forms.ComboBox();
             this.label7 = new System.Windows.Forms.Label();
             this.tbGain = new System.Windows.Forms.TextBox();
@@ -65,8 +68,7 @@
             this.toolExit = new System.Windows.Forms.ToolStripButton();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.status = new System.Windows.Forms.ToolStripStatusLabel();
-            this.thresh = new System.Windows.Forms.TextBox();
-            this.label8 = new System.Windows.Forms.Label();
+            this.no_chart = new System.Windows.Forms.CheckBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -235,6 +237,8 @@
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.no_chart);
+            this.tabPage2.Controls.Add(this.is_classification);
             this.tabPage2.Controls.Add(this.thresh);
             this.tabPage2.Controls.Add(this.label8);
             this.tabPage2.Controls.Add(this.cbFA);
@@ -258,6 +262,33 @@
             this.tabPage2.Size = new System.Drawing.Size(732, 529);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // is_classification
+            // 
+            this.is_classification.AutoSize = true;
+            this.is_classification.Location = new System.Drawing.Point(466, 251);
+            this.is_classification.Name = "is_classification";
+            this.is_classification.Size = new System.Drawing.Size(240, 20);
+            this.is_classification.TabIndex = 19;
+            this.is_classification.Text = "Trenowanie na potrzeby klasyfikacji";
+            this.is_classification.UseVisualStyleBackColor = true;
+            // 
+            // thresh
+            // 
+            this.thresh.Location = new System.Drawing.Point(466, 210);
+            this.thresh.Name = "thresh";
+            this.thresh.Size = new System.Drawing.Size(244, 22);
+            this.thresh.TabIndex = 18;
+            this.thresh.TextChanged += new System.EventHandler(this.thresh_TextChanged);
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(463, 190);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(72, 16);
+            this.label8.TabIndex = 17;
+            this.label8.Text = "Threshold:";
             // 
             // cbFA
             // 
@@ -543,22 +574,15 @@
             this.status.Name = "status";
             this.status.Size = new System.Drawing.Size(0, 17);
             // 
-            // thresh
+            // no_chart
             // 
-            this.thresh.Location = new System.Drawing.Point(466, 210);
-            this.thresh.Name = "thresh";
-            this.thresh.Size = new System.Drawing.Size(244, 22);
-            this.thresh.TabIndex = 18;
-            this.thresh.TextChanged += new System.EventHandler(this.thresh_TextChanged);
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(463, 190);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(72, 16);
-            this.label8.TabIndex = 17;
-            this.label8.Text = "Threshold:";
+            this.no_chart.AutoSize = true;
+            this.no_chart.Location = new System.Drawing.Point(466, 284);
+            this.no_chart.Name = "no_chart";
+            this.no_chart.Size = new System.Drawing.Size(131, 20);
+            this.no_chart.TabIndex = 20;
+            this.no_chart.Text = "Nie rysuj wykresu";
+            this.no_chart.UseVisualStyleBackColor = true;
             // 
             // SettingsWindow
             // 
@@ -631,5 +655,7 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.TextBox thresh;
         private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.CheckBox is_classification;
+        private System.Windows.Forms.CheckBox no_chart;
     }
 }

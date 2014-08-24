@@ -88,6 +88,7 @@ namespace LearnByErrorLibrary
         public int NBN_Topography = 0;
         public int NBN_Activation = 2;
         public double NBN_Gain = 1;
+        public bool IsClassification = false;
 
         /// <summary>
         /// Number of trials - reado only
@@ -495,13 +496,25 @@ namespace LearnByErrorLibrary
                         output = data.LastColumn.ToOutput();
                         output.Normalize();
 
-                        int[] ind = data.Rows.RandomPermutation();
-                        int Tnp = Math.Round(data.Rows * 0.7).ToInt();
+                        if (IsClassification)
+                        {
+                            int Tnp = data.Rows;
+                            inputLearn = input.CopyRows(Tnp - 1).ToInput();
+                            inputTest = input.CopyRows(Tnp - 1).ToInput();
+                            outputLearn = output.CopyRows(Tnp - 1).ToOutput();
+                            outputTest = output.CopyRows(Tnp - 1).ToOutput();
+                        }
+                        else
+                        {
 
-                        inputTest = input.CopyRows(Tnp, input.Rows - 1).ToInput();
-                        inputLearn = input.CopyRows(Tnp - 1).ToInput();
-                        outputTest = output.CopyRows(Tnp, input.Rows - 1).ToOutput();
-                        outputLearn = output.CopyRows(Tnp - 1).ToOutput();
+                            int[] ind = data.Rows.RandomPermutation();
+                            int Tnp = Math.Round(data.Rows * 0.7).ToInt();
+
+                            inputTest = input.CopyRows(Tnp, input.Rows - 1).ToInput();
+                            inputLearn = input.CopyRows(Tnp - 1).ToInput();
+                            outputTest = output.CopyRows(Tnp, input.Rows - 1).ToOutput();
+                            outputLearn = output.CopyRows(Tnp - 1).ToOutput();
+                        }
                     }
                     try
                     {
@@ -616,6 +629,8 @@ namespace LearnByErrorLibrary
 
                 hessians.Clear();
                 var hessian = new Hessian(ref info);
+                Input ii = inp.Copy().ToInput();
+                Output oo = dout.Copy().ToOutput();
 
                 for (result.iterations = 1; result.iterations < setting.MaxIterations; result.iterations++)
                 {

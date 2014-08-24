@@ -28,7 +28,7 @@
     <ProductName>NBN C#</ProductName>
     <PublisherName>Marek Bar</PublisherName>
     <AutorunEnabled>true</AutorunEnabled>
-    <ApplicationRevision>15</ApplicationRevision>
+    <ApplicationRevision>16</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -440,7 +440,7 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties IncrementOnRebuild="True" IncrementOnBuild="True" IncrementAction="3" Versioning="1" StartAt="2/16/2014 3:10:15 PM" />
+      <UserProperties StartAt="2/16/2014 3:10:15 PM" Versioning="1" IncrementAction="3" IncrementOnBuild="True" IncrementOnRebuild="True" />
     </VisualStudio>
   </ProjectExtensions>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

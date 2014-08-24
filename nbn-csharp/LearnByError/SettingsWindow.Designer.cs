@@ -65,6 +65,8 @@
             this.toolExit = new System.Windows.Forms.ToolStripButton();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.status = new System.Windows.Forms.ToolStripStatusLabel();
+            this.thresh = new System.Windows.Forms.TextBox();
+            this.label8 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -233,6 +235,8 @@
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.thresh);
+            this.tabPage2.Controls.Add(this.label8);
             this.tabPage2.Controls.Add(this.cbFA);
             this.tabPage2.Controls.Add(this.label7);
             this.tabPage2.Controls.Add(this.tbGain);
@@ -539,6 +543,23 @@
             this.status.Name = "status";
             this.status.Size = new System.Drawing.Size(0, 17);
             // 
+            // thresh
+            // 
+            this.thresh.Location = new System.Drawing.Point(466, 210);
+            this.thresh.Name = "thresh";
+            this.thresh.Size = new System.Drawing.Size(244, 22);
+            this.thresh.TabIndex = 18;
+            this.thresh.TextChanged += new System.EventHandler(this.thresh_TextChanged);
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(463, 190);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(72, 16);
+            this.label8.TabIndex = 17;
+            this.label8.Text = "Threshold:";
+            // 
             // SettingsWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -608,5 +629,7 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.ComboBox cbFA;
         private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.TextBox thresh;
+        private System.Windows.Forms.Label label8;
     }
 }

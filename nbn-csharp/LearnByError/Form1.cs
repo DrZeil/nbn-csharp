@@ -466,6 +466,7 @@ namespace LearnByError
                 nbn.NBN_Gain = app.Gain;
                 nbn.NBN_Activation = app.ActivationFunction;
                 nbn.NBN_Topography = app.TopologyType;
+                nbn.Threshold = app.Threshold;
 
                 nbn.IsResearchMode = IsResearch;
                 nbn.MatLabCompareDataFolder = MatLabCompareDataFolder;
@@ -496,6 +497,7 @@ namespace LearnByError
                     console.Hide();
                 }
                 chart.Series.Clear();
+                nbn.settings = new NeuralNetworkSettings(app.MaxIterations, app.MU, app.MUL, app.MUH, app.Scale, app.MaxError);
                 var result = nbn.Run(app.LearnTrials);
                 if (tmpMLF.Length > 0)
                 {

@@ -68,6 +68,7 @@ namespace LearnByError
                 s.TopologyType = cbTopo.SelectedIndex;
                 s.ActivationFunction = cbFA.SelectedIndex;
                 s.Gain = double.Parse(tbGain.Text);
+                s.Threshold = double.Parse(thresh.Text);
             }
             catch (Exception ex)
             {
@@ -102,6 +103,7 @@ namespace LearnByError
                 cbTopo.SelectedIndex = s.TopologyType;
                 tbGain.Text = s.Gain.ToString().Replace(",", ".");
                 cbFA.SelectedIndex = s.ActivationFunction;
+                thresh.Text = s.Threshold.ToString();
                 logsStat();
                 learnStat();
             }
@@ -238,6 +240,12 @@ namespace LearnByError
         {
             double d = 1;
             if (!double.TryParse(tbGain.Text, out d)) tbGain.Text = "";
+        }
+
+        private void thresh_TextChanged(object sender, EventArgs e)
+        {
+            double t = 1;
+            if (double.TryParse(thresh.Text, out t) == false) thresh.Text = "";
         }
     }
 }

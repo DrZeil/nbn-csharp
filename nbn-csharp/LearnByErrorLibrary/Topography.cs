@@ -70,7 +70,7 @@ namespace LearnByErrorLibrary
         {
             try
             {
-                System.Collections.Generic.List<double> vals = new System.Collections.Generic.List<double>();
+                var vals = new System.Collections.Generic.List<double>();
                 int nl = lbl.Length;
                 for (int i = 1; i < nl; i++)
                 {
@@ -86,7 +86,6 @@ namespace LearnByErrorLibrary
                         }
                     }
                 }
-
                 var topo = new Topography(vals.ToArray());
                 topo.Type = TopographyType.MLP;
                 return topo;
@@ -101,7 +100,7 @@ namespace LearnByErrorLibrary
         {
             try
             {
-                System.Collections.Generic.List<double> vals = new System.Collections.Generic.List<double>();
+                var vals = new System.Collections.Generic.List<double>();
                 int nl = lbl.Length;
                 for (int i = 1; i < nl; i++)
                 {

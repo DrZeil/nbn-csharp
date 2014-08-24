@@ -79,6 +79,27 @@ namespace LearnByError
             }
         }
 
+        public double Threshold
+        {
+            get
+            {
+                double val = 1;
+                if (double.TryParse(get("THRESHOLD"), out val))
+                {
+                    return val;
+                }
+                else
+                {
+                    return 1;
+                }
+            }
+
+            set
+            {
+                set("THRESHOLD", value.ToString());
+            }
+        }
+
         /// <summary>
         /// High bound of MU
         /// </summary>

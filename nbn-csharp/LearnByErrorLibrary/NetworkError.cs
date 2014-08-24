@@ -50,7 +50,7 @@ namespace LearnByErrorLibrary
         public double CalculateError(ref NetworkInfo info, ref Input inp, ref Output dout, ref Topography topo, 
                                      Weights ww, ref Activation act, ref Gain gain, ref Index iw)
         {
-            try//this is tested version - see unit test
+            try
             {
                 Error = 0;
                 for (p = 0; p < info.np; p++)

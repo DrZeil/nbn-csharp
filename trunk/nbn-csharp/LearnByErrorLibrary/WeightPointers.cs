@@ -39,7 +39,7 @@ namespace LearnByErrorLibrary
         public static Index Find(ref Topography topo)
         {
 
-            System.Collections.Generic.List<double> iw = new System.Collections.Generic.List<double>();
+            var iw = new System.Collections.Generic.List<double>();
             int nmax = 0;
             int i = 0;
             for (i = 0; i < topo.Length; i++)
@@ -52,7 +52,7 @@ namespace LearnByErrorLibrary
                 }                
             }
 
-            iw.Add(i);//otherwise error calculation will be wrong
+            iw.Add(i);
 
             Index ip = new Index(iw.Count);
             ip.Data[0] = iw.ToArray();

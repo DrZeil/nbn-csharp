@@ -628,8 +628,7 @@ namespace LearnByErrorLibrary
 
                     for (int jw = 0; jw < 30; jw++)
                     {
-                        var diff = (hessian.HessianMat + (I * setting.MU)).SolveEquatation(hessian.GradientMat).Transposed;
-                        //((H + I * mu)\g)'
+                        var diff = (hessian.HessianMat + (I * setting.MU)).SolveEquatation(hessian.GradientMat).Transposed;                        
                         if (OnDebug != null)
                         {
                             debug("\r\nOdejmuję");
@@ -718,13 +717,23 @@ namespace LearnByErrorLibrary
             }
         }
 
+        private NeuralNetworkSettings backupSettings;
+
         /// <summary>
         /// Run NBN training and its test - this is the first version
         /// </summary>
         /// <param name="trials">int - number of learning trials</param>
-        /// <returns>LearnResult</returns>
+        /// <returns>LearnResult</returns>R
         private LearnResult RunFirstVersion(int trials)
         {
+            backupSettings = new NeuralNetworkSettings();
+            backupSettings.MaxError = settings.MaxError;
+            backupSettings.MaxIterations = settings.MaxIterations;
+            backupSettings.MU = settings.MU;
+            backupSettings.MUH = settings.MUH;
+            backupSettings.MUL = settings.MUL;
+            backupSettings.Scale = settings.Scale;
+
             Trials = trials;
             LearnResult result = new LearnResult();
             result.Filename = Filename;
@@ -827,6 +836,13 @@ namespace LearnByErrorLibrary
 
                 settings = null;
                 settings = NeuralNetworkSettings.Default();
+                settings.MaxError = backupSettings.MaxError;
+                settings.MaxIterations = backupSettings.MaxIterations;
+                settings.MU = backupSettings.MU;
+                settings.MUH = backupSettings.MUH;
+                settings.MUL = backupSettings.MUL;
+                settings.Scale = backupSettings.Scale;
+
                 I = MatrixMB.Eye(info.nw);
 
                 tic();//learn time measure start
@@ -871,14 +887,15 @@ namespace LearnByErrorLibrary
                     debug("\r\nTest RMSE: " + result.TestRMSE.ToString() + "\r\n");
                 }
 
-                if (result.LearnRMSE < Threshold) IsTrainOK++;
+                //if (result.LearnRMSE < Threshold) IsTrainOK++;
+                if (result.SSE[trial][result.SSE[trial].Length - 1] < Threshold) IsTrainOK++;
             }
 
             result.LearnRMSE = AverageLearnRMSE;
             result.TestRMSE = AverageTestRMSE;
 
             result.setStatisticsData(LearnRMSE, TestRMSE, LearnTime, TestTime, Trials);
-            result.SuccessRate = IsTrainOK / Trials;
+            result.SuccessRate = (double)IsTrainOK / Trials;
 
             if (IsResearchMode)//save research
             {
